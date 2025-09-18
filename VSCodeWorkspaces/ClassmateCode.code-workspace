@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "ClassmateCode"
+		}
+	],
+	"settings": {
+		"csharp.format.enable": true
+	}
+}

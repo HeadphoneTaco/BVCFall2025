@@ -1,44 +1,51 @@
 using UnityEngine;
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] int spacebarPressCount;
+    [SerializeField] int numberOfTicks;
+    [SerializeField] int numberOfObjects;
+    [SerializeField] int maxNumberOfObjects;
+    [SerializeField] int updateFrequency; // How often the logic should run (in seconds)
     public GameObject square;
     public GameObject circle;
     public GameObject triangle;
-    void FixedUpdate()
+    private float _timer;
+
+    void Update()
     {
-       PressSpace();
-       CheckSpacePress();
+        _timer += Time.deltaTime;
+        if (_timer >= updateFrequency)
+        {
+            // Place your logic here that needs to run at a slower rate
+            numberOfTicks++;
+            CheckNumberOfObjects();
+            _timer = 0f; // Reset the timer
+        }
     }
 
-    private void PressSpace()
+    void CheckNumberOfObjects()
     {
-        while (true)
+        while (numberOfObjects <= maxNumberOfObjects)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                spacebarPressCount++;
-            }
-        }
-    }
-    private void CheckSpacePress()
-    {
-        if (spacebarPressCount <= 10 && spacebarPressCount >= 0)
-        {
-            Instantiate(square);
-        }
-        else if (spacebarPressCount <= 20 && spacebarPressCount >= 10)
-        {
-            Instantiate(circle);
-        }
-        else if (spacebarPressCount> 30 && spacebarPressCount >= 20)
-        {
-            Instantiate(triangle);
-        }
-        else
-        {
-            spacebarPressCount = 0;
-        }
+         SpawnThings();
+        }       
     }
     
+    void SpawnThings()
+    {
+        switch (numberOfTicks)
+        {
+            case > 0 and < 10:
+                Instantiate(square);
+                break;
+            case > 10 and < 20:
+                Instantiate(circle);
+                break;
+            case > 20 and < 30:
+                Instantiate(triangle);
+                break;
+            case > 30 :
+                numberOfTicks = 0;
+                break;
+        }
+    }
 }

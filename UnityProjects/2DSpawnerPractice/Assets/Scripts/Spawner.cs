@@ -1,50 +1,38 @@
 using UnityEngine;
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] int numberOfTicks;
-    [SerializeField] int numberOfObjects;
-    [SerializeField] int maxNumberOfObjects;
-    [SerializeField] int updateFrequency; // How often the logic should run (in seconds)
+    private float _nextSpawnTime;
+    public int count;
+    public float updateFrequency;
     public GameObject square;
     public GameObject circle;
     public GameObject triangle;
-    private float _timer;
-
-    void Update()
+    private void FixedUpdate()
     {
-        _timer += Time.deltaTime;
-        if (_timer >= updateFrequency)
-        {
-            // Place your logic here that needs to run at a slower rate
-            numberOfTicks++;
-            CheckNumberOfObjects();
-            _timer = 0f; // Reset the timer
-        }
-    }
-
-    void CheckNumberOfObjects()
-    {
-        while (numberOfObjects <= maxNumberOfObjects)
-        {
-         SpawnThings();
-        }       
+        if (!Input.GetKey(KeyCode.Space) || !(Time.time > _nextSpawnTime)) return;
+        count++;
+        CheckCount();
+        _nextSpawnTime = Time.time + updateFrequency;
     }
     
-    void SpawnThings()
+    private void CheckCount()
     {
-        switch (numberOfTicks)
+        switch (count / 10)
         {
-            case > 0 and < 10:
+            case 0:
                 Instantiate(square);
                 break;
-            case > 10 and < 20:
+
+            case 1:
                 Instantiate(circle);
                 break;
-            case > 20 and < 30:
+
+            case 2:
                 Instantiate(triangle);
                 break;
-            case > 30 :
-                numberOfTicks = 0;
+
+            default:
+                count = 0;
                 break;
         }
     }

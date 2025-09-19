@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     public GameObject square;
     public GameObject circle;
     public GameObject triangle;
-    private void FixedUpdate()
+    private void FixedUpdate()//Only spawns when space is held down
     {
         if (!Input.GetKey(KeyCode.Space) || !(Time.time > _nextSpawnTime)) return;
         count++;
@@ -15,10 +15,14 @@ public class Spawner : MonoBehaviour
         _nextSpawnTime = Time.time + updateFrequency;
     }
     
-    private void CheckCount()
+    private void CheckCount()//Spawns different shapes based on the count
     {
         switch (count / 10)
         {
+            case -1: 
+                Debug.Log("Bro how the hell did you break this even more?"); 
+                break;
+            
             case 0:
                 Instantiate(square);
                 break;
@@ -30,9 +34,13 @@ public class Spawner : MonoBehaviour
             case 2:
                 Instantiate(triangle);
                 break;
+            
+            case 3:
+                count = 0;
+                break;
 
             default:
-                count = 0;
+                Debug.Log("How the hell did you get here?");
                 break;
         }
     }

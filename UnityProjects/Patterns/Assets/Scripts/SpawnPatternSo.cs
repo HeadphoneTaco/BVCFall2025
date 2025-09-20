@@ -46,6 +46,7 @@ public abstract class SpawnPatternSo : ScriptableObject
                         //break out if we reach the count
                     
                     }
+                    return positions;
     }
     
     */

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Spawn Patterns/Template")]
-public class PatternTemplateSo : SpawnPatternSo
+
+public class Template : PositionList
 {
     [Header("Custom Settings")]
     public float somethinggoeshere;

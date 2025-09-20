@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PatternSpawner : MonoBehaviour
+public class SpawnController : MonoBehaviour
 {
     [Header("Prefab Settings")]
     public List<GameObject> prefabs; //list of prefabs to choose from
@@ -11,14 +11,14 @@ public class PatternSpawner : MonoBehaviour
     public float spacing; //how much space between each prefab
 
     [Header("Pattern Settings")]
-    public List<SpawnPatternSo> patterns; //list of scriptable pattern oooobjectss to choose from
+    public List<PositionList> patterns; //list of scriptable pattern oooobjectss to choose from
 
     private int _currentPatternIndex;
     private int _currentPrefabIndex;
     //keep track of spawned objects to nuke em later
     private List<GameObject> _spawnedObjects = new();
     
-    [Header("ui stuff")]
+    [Header("UI stuff")]
     public TextMeshProUGUI infoText;
 
     void Start()

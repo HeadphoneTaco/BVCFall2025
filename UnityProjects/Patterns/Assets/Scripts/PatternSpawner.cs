@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PatternSpawner : MonoBehaviour
@@ -11,12 +12,14 @@ public class PatternSpawner : MonoBehaviour
 
     [Header("Pattern Settings")]
     public List<SpawnPatternSo> patterns; //list of scriptable pattern oooobjectss to choose from
-    //TODO: fix this
 
     private int _currentPatternIndex;
     private int _currentPrefabIndex;
     //keep track of spawned objects to nuke em later
     private List<GameObject> _spawnedObjects = new();
+    
+    [Header("ui stuff")]
+    public TextMeshProUGUI infoText;
 
     void Start()
     {
@@ -70,7 +73,7 @@ public class PatternSpawner : MonoBehaviour
     //previous prefab
     public void PreviousPrefab()
     {
-        _currentPrefabIndex = (_currentPrefabIndex - 1 + patterns.Count) % patterns.Count;
+        _currentPrefabIndex = (_currentPrefabIndex - 1 ) % patterns.Count;
         SpawnCurrentPattern();
     }
 
@@ -94,9 +97,20 @@ public class PatternSpawner : MonoBehaviour
             var obj = Instantiate(prefabs[_currentPrefabIndex], pos, Quaternion.identity, transform);
             _spawnedObjects.Add(obj);
         }
-        
+
+        UpdateUI();
     }
     //update ui
+    private void UpdateUI()
+    {
+        //TODO: find less expensive way to do this
+        if (infoText != null)
+        {
+            string patternName = patterns[_currentPatternIndex].name;
+            string prefabName = prefabs[_currentPrefabIndex].name;
+            infoText.text = $"Pattern: {patternName}\nPrefab: {prefabName}";
+        }
+    }
 }
 
     //error handling where?

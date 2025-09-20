@@ -8,15 +8,17 @@ public class SpawnController : MonoBehaviour
     public List<GameObject> prefabs; //list of prefabs to choose from
 
     public int count; //how many prefabs to spawn
-    public float spacing; //how much space between each prefab
+    public float spacing; //many units of space between each prefab
 
     [Header("Pattern Settings")]
-    public List<PositionList> patterns; //list of scriptable pattern oooobjectss to choose from
+    public List<PositionList> patterns; //list of scriptable pattern objects to choose from
 
     private int _currentPatternIndex;
     private int _currentPrefabIndex;
     //keep track of spawned objects to nuke em later
     private List<GameObject> _spawnedObjects = new();
+
+     
     
     [Header("UI stuff")]
     public TextMeshProUGUI infoText;
@@ -24,34 +26,36 @@ public class SpawnController : MonoBehaviour
     void Start()
     {
         SpawnCurrentPattern();
+        
     }
     //have a default pattern and prefab to spawn on start
 
     //listen for button presses to change prefab and pattern
     
     //change this to switch case for efficiency?
+    //can go out of range with current code
+    //TODO: stop indices from exceeding bounds
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             NextPattern();
         }
-
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             PreviousPattern();
         }
-
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             PreviousPrefab();
         }
-
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             NextPrefab();
         }
     }
+    
+    
     //next pattern
     public void NextPattern()
     {
@@ -61,7 +65,7 @@ public class SpawnController : MonoBehaviour
     //previous pattern
     public void PreviousPattern()
     {
-        _currentPatternIndex = (_currentPatternIndex - 1 + patterns.Count) % patterns.Count;
+        _currentPatternIndex = (_currentPatternIndex - 1) % patterns.Count;
         SpawnCurrentPattern();
     }
     //next prefab
@@ -73,7 +77,7 @@ public class SpawnController : MonoBehaviour
     //previous prefab
     public void PreviousPrefab()
     {
-        _currentPrefabIndex = (_currentPrefabIndex - 1 ) % patterns.Count;
+        _currentPrefabIndex = (_currentPrefabIndex - 1) % patterns.Count;
         SpawnCurrentPattern();
     }
 

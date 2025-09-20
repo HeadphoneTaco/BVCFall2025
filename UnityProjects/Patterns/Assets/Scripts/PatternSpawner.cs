@@ -13,6 +13,8 @@ public class PatternSpawner : MonoBehaviour
     {
        
     }
+    //have a default pattern and prefab to spawn on start
+    
     
     void Update()
     {
@@ -23,16 +25,28 @@ public class PatternSpawner : MonoBehaviour
 
    
 
-    //change patterns
+    
+    
+    
+    
+    //change prefab
+            // remove previously spawned objects
 
-    //change prefabs
+            //get info from currently selected pattern
 
-    // remove previously spawned objects
+            //spawn new objects based on pattern
+            
 
-    //get info from currently selected pattern
+    //Change pattern    
+    
+            // remove previously spawned objects
 
-    //spawn new objects based on pattern
+            //get info from currently selected pattern
+
+            //spawn new objects based on pattern
     
 
 //update ui
+
+//error handling where?
 }

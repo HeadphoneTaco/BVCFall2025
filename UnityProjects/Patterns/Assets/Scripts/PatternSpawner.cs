@@ -10,7 +10,7 @@ public class PatternSpawner : MonoBehaviour
     public float spacing; //how much space between each prefab
 
     [Header("Pattern Settings")]
-    public List<SpawnPatternSO> patterns; //list of scriptable pattern oooobjectss to choose from
+    public List<SpawnPatternSo> patterns; //list of scriptable pattern oooobjectss to choose from
     //TODO: fix this
 
     private int _currentPatternIndex;

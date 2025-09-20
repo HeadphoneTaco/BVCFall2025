@@ -31,7 +31,7 @@ public class SineSo : SpawnPatternSo
         //iterate through _____
 
         //add new positions to list
-        positions.Add(new Vector3(j * spacing, 0, i * spacing));
+        //positions.Add(new Vector3(j * spacing, 0, i * spacing));
 
         if (positions.Count >= count)
         {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Spawn Patterns/StarPattern")]
-public class StarPattern : PositionList
+public class StarPattern : SimplePatternController
 {
     public int points = 5;
     public float radius = 5f;

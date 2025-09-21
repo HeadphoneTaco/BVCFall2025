@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Spawn Patterns/SinePattern")]
-public class SinePattern : PositionList
+public class SinePattern : SimplePatternController
 {
     public float amplitude = 2f;
     public float wavelength = 2f;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PositionList : ScriptableObject
+public abstract class SimplePatternController : ScriptableObject
 {
     //abstract to be overridden
     public abstract List<Vector3> GetPositions(int count, float spacing);

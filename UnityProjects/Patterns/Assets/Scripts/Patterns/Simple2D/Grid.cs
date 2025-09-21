@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Spawn Patterns/GridPattern")]
-public class GridPattern : PositionList
+public class GridPattern : SimplePatternController
 {
     //override the abstract
     public override List<Vector3> GetPositions(int count, float spacing)

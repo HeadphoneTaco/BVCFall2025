@@ -59,28 +59,27 @@ public class SpawnController : MonoBehaviour
     //next pattern
     public void NextPattern()
     {
-        _currentPatternIndex = (_currentPatternIndex + 1) % patterns.Count;
+        _currentPatternIndex = Mathf.Clamp(_currentPatternIndex + 1, 0, patterns.Count -1);
         SpawnCurrentPattern();
     }
     //previous pattern
     public void PreviousPattern()
     {
-        _currentPatternIndex = (_currentPatternIndex - 1) % patterns.Count;
+        _currentPatternIndex = Mathf.Clamp(_currentPatternIndex - 1, 0, patterns.Count - 1);
         SpawnCurrentPattern();
     }
     //next prefab
     public void NextPrefab()
     {
-        _currentPrefabIndex = (_currentPrefabIndex + 1) % patterns.Count;
+        _currentPrefabIndex = Mathf.Clamp(_currentPrefabIndex + 1, 0, prefabs.Count - 1);
         SpawnCurrentPattern();
     }
     //previous prefab
     public void PreviousPrefab()
     {
-        _currentPrefabIndex = (_currentPrefabIndex - 1) % patterns.Count;
+        _currentPrefabIndex = Mathf.Clamp(_currentPrefabIndex - 1, 0,   prefabs.Count-1);
         SpawnCurrentPattern();
     }
-
 
     //Change pattern or prefab
     private void SpawnCurrentPattern()

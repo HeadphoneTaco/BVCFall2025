@@ -11,7 +11,7 @@ public class SpawnController : MonoBehaviour
     public float spacing; //many units of space between each prefab
 
     [Header("Pattern Settings")]
-    public List<PositionList> patterns; //list of scriptable pattern objects to choose from
+    public List<SimplePatternController> patterns; //list of scriptable pattern objects to choose from
 
     private int _currentPatternIndex;
     private int _currentPrefabIndex;

@@ -10,7 +10,7 @@ public class GridPattern : SimplePatternController
     {
         //make list of new positions
         var positions = new List<Vector3>();
-        int size = Mathf.CeilToInt(Mathf.Sqrt(count));
+        int size = Mathf.CeilToInt(Mathf.Sqrt(count));//Square root of count rounded up
 
         //iterate through rows
         for (int i = 0; i < size; i++)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Patterns.Base;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Spawn Patterns/LinePattern")]

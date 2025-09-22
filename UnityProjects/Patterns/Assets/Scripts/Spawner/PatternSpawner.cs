@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Patterns.Base;
 
-public class SpawnController : MonoBehaviour
+namespace Spawner
+{
+public class PatternSpawner : MonoBehaviour
 {
     [Header("Prefab Settings")]
     public List<GameObject> prefabs; //list of prefabs to choose from
@@ -114,6 +117,7 @@ public class SpawnController : MonoBehaviour
             infoText.text = $"Pattern: {patternName}\nPrefab: {prefabName}";
         }
     }
+}
 }
 
     //error handling where?

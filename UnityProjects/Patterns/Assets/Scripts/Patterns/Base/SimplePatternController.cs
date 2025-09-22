@@ -1,12 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Patterns.Base
+{
+    
+
 public abstract class SimplePatternController : ScriptableObject
 {
     //abstract to be overridden
     public abstract List<Vector3> GetPositions(int count, float spacing);
 }
 
+}
 /* Example of a derived class implementing a pattern
 
 

@@ -1,21 +1,26 @@
 100 dashes wide
 ----------------------------------------------------------------------------------------------------
+TODO:ELI5
+
 card types
--Placement, may be played on your turn.
--Attack, may be played on your turn.
+-Placement, is only played on your turn.
+-Attack, is only played on your turn.
 -Effect, may be played at any time.
 
 --Play area are the white tiles.
 --4 Players, use black border.
 --3 Players, use grey border.
 --Edgewise connected tiles in largest group wins, each tile that is connected at corners is not scored.
+--Pieces that are covered by another color do not count towards score
 
-1-Start w 4 cards in hand.
-2-Roll d20 to go first, turns in clockwise order.
+1-Start w 4 cards in hand, **max hand size of 4**
+2-Roll d20 to go first, highest value starts, turns in clockwise order.
 3-One placement and one attack per turn.
-4-You must draw draw up to 4 cards at end of your turn. eg, if you use a effect card to prevent an attack, you can only draw up to 4 after your turn is completed.
-5-Game ends when no more cards can be drawn from draw pile, last player may still play legal cards.
-6-Last turn is triggered when a player cannot make a legal move, everyone else gets one last turn.
+
+
+4-You must draw **up to 4 cards** at end of your turn. eg, if you use a effect card to prevent an attack, you can only draw up to 4 **after your turn is completed**.
+
+6-Last turn is triggered when a player cannot make a **legal move**, everyone else gets one last turn.
 7-Can only play on empty tiles unless attack card specifies otherwise.
 ----------------------------------------------------------------------------------------------------
 using UnityEngine;

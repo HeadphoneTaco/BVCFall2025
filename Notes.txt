@@ -260,4 +260,70 @@ public class RandomHeightGridSO : SpawnPatternSO
 }
 ----------------------------------------------------------------------------------------------------
 
+//From Max and Allan
+
+using UnityEngine;
+
+public class PyramidGenerator : MonoBehaviour
+{
+
+    [SerializeField] private int length = 9;
+    [SerializeField] private GameObject prefab;
+    
+    int count = 0;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        //float fakeLength = 9f;
+        
+        //for (int i = 0; i < fakeLength; i++)
+        //{
+        //    GeneratePyramid(i); 
+        //}
+        for (int i = 0; i < length; i++)
+        {
+            TestGeneratePyramid(i);
+        }
+        
+        
+    }
+
+    private void GeneratePyramid(int y)
+    {
+        int spawnX = length/2;
+        int spawnZ = length/2;
+
+
+        
+        
+        for (int x = 0; x < length; x++)
+        {
+            for (int i = 0; i < length; i++)
+            {
+                Instantiate(prefab, new Vector3(spawnX, y, spawnZ), Quaternion.identity);
+                spawnZ--;
+            }
+
+            spawnX--;
+            spawnZ = length;
+        }
+
+        length--;
+    }
+    
+    private void TestGeneratePyramid(int y)
+    {
+        for (int x = count; x < length - y; x++)
+        {
+            for (int i = count; i < length - y; i++)
+            {
+                Instantiate(prefab, new Vector3(i, y, x), Quaternion.identity);
+            }
+        }
+
+        count++;
+        Debug.Log(count);
+    }
+}
+
 

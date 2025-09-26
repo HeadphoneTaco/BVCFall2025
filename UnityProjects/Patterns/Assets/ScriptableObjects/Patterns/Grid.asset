@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50878a9b6d77cac438a804bfd4fff194, type: 3}
-  m_Name: Grid Pattern
+  m_Name: Grid
   m_EditorClassIdentifier: 

@@ -16,9 +16,18 @@ MonoBehaviour:
   m_Sources:
   - {fileID: 102900000, guid: ee554e6d9938cee4781fc46ea6f7cd38, type: 3}
   m_AssetRefs:
+  - Name: helix
+    Guid: 212e9df2fed9d654291df18cd2a69511
+    Asset: {fileID: 11400000, guid: 212e9df2fed9d654291df18cd2a69511, type: 2}
+  - Name: sphere
+    Guid: 66cad8f0a3e98e841b711bb9fa2a03b3
+    Asset: {fileID: 11400000, guid: 66cad8f0a3e98e841b711bb9fa2a03b3, type: 2}
   - Name: spiral
     Guid: 6a9d89728b1026241a43dbac0cd6e7d9
     Asset: {fileID: 11400000, guid: 6a9d89728b1026241a43dbac0cd6e7d9, type: 2}
+  - Name: cube
+    Guid: 70220c4551687e146a863e4b4269b22f
+    Asset: {fileID: 11400000, guid: 70220c4551687e146a863e4b4269b22f, type: 2}
   - Name: circle
     Guid: 7226c6e758f0eb64e869bb4df101cadf
     Asset: {fileID: 11400000, guid: 7226c6e758f0eb64e869bb4df101cadf, type: 2}

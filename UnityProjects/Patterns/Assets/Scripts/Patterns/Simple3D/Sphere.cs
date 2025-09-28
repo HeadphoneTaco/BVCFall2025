@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Spawn Patterns/SpherePattern")]
-public class SpherePattern : SimplePatternController
+[CreateAssetMenu(menuName = "Patterns/Sphere")]
+public class Sphere : PatternBehaviour
 {
     public float radius = 5f;
 

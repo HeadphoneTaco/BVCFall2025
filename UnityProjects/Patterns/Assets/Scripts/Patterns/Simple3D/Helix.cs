@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using Patterns.Base;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Spawn Patterns/HelixPattern")]
-public class HelixPattern : SimplePatternController
+[CreateAssetMenu(menuName = "Patterns/Helix")]
+public class Helix : PatternBehaviour
 {
     public float radius = 5f;
     public float heightStep = 0.5f;

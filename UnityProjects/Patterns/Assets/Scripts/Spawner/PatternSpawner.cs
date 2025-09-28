@@ -1,43 +1,31 @@
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using Patterns.Base;
+using System.Collections.Generic;
+using CoreUtils.AssetBuckets;
+using TMPro; 
 
-namespace Spawner
-{
 public class PatternSpawner : MonoBehaviour
 {
-    [Header("Prefab Settings")]
-    public List<GameObject> prefabs; //list of prefabs to choose from
+    [Header("Buckets")]
+    public PatternBucket patternBucket;   // typed wrapper from PatternBucket.cs
+    public PrefabBucket prefabBucket;     // CoreUtils provided bucket for GameObjects
 
-    public int count; //how many prefabs to spawn
-    public float spacing; //many units of space between each prefab
-
-    [Header("Pattern Settings")]
-    public List<SimplePatternController> patterns; //list of scriptable pattern objects to choose from
+    [Header("Settings")]
+    public int count = 10;
+    public float spacing = 2f;
 
     private int _currentPatternIndex;
     private int _currentPrefabIndex;
-    //keep track of spawned objects to nuke em later
-    private List<GameObject> _spawnedObjects = new();
-
-     
+    private readonly List<GameObject> _spawned = new();
     
     [Header("UI stuff")]
     public TextMeshProUGUI infoText;
-
-    void Start()
-    {
-        SpawnCurrentPattern();
-        
-    }
-    //have a default pattern and prefab to spawn on start
-
-    //listen for button presses to change prefab and pattern
     
-    //change this to switch case for efficiency?
-    //can go out of range with current code
-    //TODO: stop indices from exceeding bounds
+
+    public void Start()
+    {
+        Spawn();
+    }
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -57,68 +45,116 @@ public class PatternSpawner : MonoBehaviour
             NextPrefab();
         }
     }
-    
-    
-    //next pattern
-    public void NextPattern()
-    {
-        _currentPatternIndex = Mathf.Clamp(_currentPatternIndex + 1, 0, patterns.Count -1);
-        SpawnCurrentPattern();
-    }
-    //previous pattern
-    public void PreviousPattern()
-    {
-        _currentPatternIndex = Mathf.Clamp(_currentPatternIndex - 1, 0, patterns.Count - 1);
-        SpawnCurrentPattern();
-    }
-    //next prefab
-    public void NextPrefab()
-    {
-        _currentPrefabIndex = Mathf.Clamp(_currentPrefabIndex + 1, 0, prefabs.Count - 1);
-        SpawnCurrentPattern();
-    }
-    //previous prefab
-    public void PreviousPrefab()
-    {
-        _currentPrefabIndex = Mathf.Clamp(_currentPrefabIndex - 1, 0,   prefabs.Count-1);
-        SpawnCurrentPattern();
-    }
 
-    //Change pattern or prefab
-    private void SpawnCurrentPattern()
+    private void Spawn()
     {
-        // 'unalive' previously spawned objects
-        foreach (var obj in _spawnedObjects)
+        Clear();
+
+        if (patternBucket == null || patternBucket.Items == null || patternBucket.Items.Length == 0)
         {
-            Destroy(obj);
-        }
-        _spawnedObjects.Clear();
-
-        //get new info
-        var positions = patterns[_currentPatternIndex].GetPositions(count, spacing);
-
-        //spawn new objects based on pattern
-        foreach (var pos in positions)
-        {
-            var obj = Instantiate(prefabs[_currentPrefabIndex], pos, Quaternion.identity, transform);
-            _spawnedObjects.Add(obj);
+            Debug.LogWarning("PatternSpawner: no patterns in patternBucket.");
+            return;
         }
 
+        if (prefabBucket == null || prefabBucket.Items == null || prefabBucket.Items.Length == 0)
+        {
+            Debug.LogWarning("PatternSpawner: no prefabs in prefabBucket.");
+            return;
+        }
+
+        // Clamp indices so edits to bucket length don't crash
+        _currentPatternIndex = Mathf.Clamp(_currentPatternIndex, 0, patternBucket.Items.Length - 1);
+        _currentPrefabIndex  = Mathf.Clamp(_currentPrefabIndex, 0, prefabBucket.Items.Length - 1);
+
+        var pattern = patternBucket.Items[_currentPatternIndex];
+        var prefab  = prefabBucket.Items[_currentPrefabIndex];
+
+        if (pattern == null || prefab == null)
+        {
+            Debug.LogWarning("PatternSpawner: selected pattern or prefab is null.");
+            return;
+        }
+
+        List<Vector3> positions;
+        try
+        {
+            positions = pattern.GetPositions(count, spacing) ?? new List<Vector3>();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"PatternSpawner: exception when evaluating pattern '{pattern.name}': {ex}");
+            return;
+        }
+
+        Debug.Log($"Spawning pattern '{pattern.name}' ({positions.Count} positions) with prefab '{prefab.name}'");
+
+        foreach (var localPos in positions)
+        {
+            Vector3 worldPos = transform.TransformPoint(localPos);
+
+            var go = Instantiate(prefab, worldPos, Quaternion.identity, transform);
+            _spawned.Add(go);
+        }
         UpdateUI();
     }
+
+    private void Clear()
+    {
+        for (int i = _spawned.Count - 1; i >= 0; i--)
+        {
+            var obj = _spawned[i];
+            if (obj == null) { _spawned.RemoveAt(i); continue; }
+
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+                DestroyImmediate(obj);
+            else
+                Destroy(obj);
+#else
+            Destroy(obj);
+#endif
+            _spawned.RemoveAt(i);
+        }
+        _spawned.Clear();
+    }
+    
     //update ui
     private void UpdateUI()
     {
         //TODO: find less expensive way to do this
         if (infoText != null)
         {
-            string patternName = patterns[_currentPatternIndex].name;
-            string prefabName = prefabs[_currentPrefabIndex].name;
+            string patternName = patternBucket.Items[_currentPatternIndex].name;
+            string prefabName = prefabBucket.Items[_currentPrefabIndex].name;
             infoText.text = $"Pattern: {patternName}\nPrefab: {prefabName}";
         }
     }
-}
-}
 
-    //error handling where?
+    private void NextPattern()
+    {
+        if (patternBucket == null || patternBucket.Items == null || patternBucket.Items.Length == 0) return;
+        _currentPatternIndex = (_currentPatternIndex + 1) % patternBucket.Items.Length;
+        Spawn();
+    }
 
+    private void PreviousPattern()
+    {
+        if (patternBucket == null || patternBucket.Items == null || patternBucket.Items.Length == 0) return;
+        _currentPatternIndex = (_currentPatternIndex - 1 + patternBucket.Items.Length) % patternBucket.Items.Length;
+        Spawn();
+    }
+
+    private void NextPrefab()
+    {
+        if (prefabBucket == null || prefabBucket.Items == null || prefabBucket.Items.Length == 0) return;
+        _currentPrefabIndex = (_currentPrefabIndex + 1) % prefabBucket.Items.Length;
+        Spawn();
+    }
+
+    private void PreviousPrefab()
+    {
+        if (prefabBucket == null || prefabBucket.Items == null || prefabBucket.Items.Length == 0) return;
+        _currentPrefabIndex = (_currentPrefabIndex - 1 + prefabBucket.Items.Length) % prefabBucket.Items.Length;
+        Spawn();
+    }
+}

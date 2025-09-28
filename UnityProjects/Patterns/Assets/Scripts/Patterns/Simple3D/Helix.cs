@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(menuName = "Patterns/Helix")]
+[CreateAssetMenu(menuName = "Patterns/3D/Helix")]
 public class Helix : PatternBehaviour
 {
-    public float radius = 5f;
-    public float heightStep = 0.5f;
 
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
+    public override List<Vector3> GetPositions(int count, float spacing){
         var positions = new List<Vector3>();
+        
+        float radius = spacing * 2;
+        float heightStep = spacing * 0.5f;
 
         for (int i = 0; i < count; i++)
         {

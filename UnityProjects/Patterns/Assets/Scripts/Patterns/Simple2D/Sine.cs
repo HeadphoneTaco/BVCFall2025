@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Patterns/Sine")]
+[CreateAssetMenu(menuName = "Patterns/2D/Sine")]
 public class Sine : PatternBehaviour
 {
     public float amplitude = 2f;

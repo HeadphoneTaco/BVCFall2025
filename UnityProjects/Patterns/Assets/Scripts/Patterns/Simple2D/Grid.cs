@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Patterns/Grid")]
+[CreateAssetMenu(menuName = "Patterns/2D/Grid")]
 public class Grid : PatternBehaviour
 {
     //override the abstract

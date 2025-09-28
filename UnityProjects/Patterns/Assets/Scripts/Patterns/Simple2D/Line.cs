@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Patterns/Line")]
+[CreateAssetMenu(menuName = "Patterns/2D/Line")]
 public class Line : PatternBehaviour
 {
     public override List<Vector3> GetPositions(int count, float spacing)

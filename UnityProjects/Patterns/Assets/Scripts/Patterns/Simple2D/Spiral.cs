@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Patterns/Spiral")]
+[CreateAssetMenu(menuName = "Patterns/2D/Spiral")]
 public class Spiral : PatternBehaviour
 {
     public float radiusStep = 0.5f;

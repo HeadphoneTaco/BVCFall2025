@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 using UnityEngine;
-[CreateAssetMenu(menuName = "Patterns/Cube")]
+[CreateAssetMenu(menuName = "Patterns/3D/Cube")]
 public class Cube : PatternBehaviour
 {
     public override List<Vector3> GetPositions(int count, float spacing)

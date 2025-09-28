@@ -946,10 +946,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff002466aee75e4a90f6d8b531a9d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patternBucket: {fileID: 11400000, guid: e83a5b370f57b10488947ce48aff675c, type: 2}
-  prefabBucket: {fileID: 11400000, guid: b2e12b1b51ebb644cbd3efd922b530f0, type: 2}
+  patternBucket: {fileID: 11400000, guid: 0c01f594c712c7046bffc28b93614210, type: 2}
+  prefabBucket: {fileID: 11400000, guid: a5ad1805329065640b8cb52923883c5b, type: 2}
   count: 100
-  spacing: 10
+  spacing: 3
   infoText: {fileID: 33697169}
 --- !u!1 &1588575926
 GameObject:

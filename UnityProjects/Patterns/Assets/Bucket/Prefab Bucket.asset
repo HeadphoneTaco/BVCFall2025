@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9905e5f181904194ad6cb66e08c9fccd, type: 3}
-  m_Name: Test Prefab Bucket
+  m_Name: Prefab Bucket
   m_EditorClassIdentifier: 
   m_BucketName: 
   m_Sources:
@@ -19,6 +19,9 @@ MonoBehaviour:
   - Name: capsule
     Guid: 09fb704fb45a2cb47b9d0ae08b5d40f5
     Asset: {fileID: 5897706988370717299, guid: 09fb704fb45a2cb47b9d0ae08b5d40f5, type: 3}
+  - Name: nogravcylinder
+    Guid: 1ee391d23f87af648b06849a44384cd6
+    Asset: {fileID: 1711308743383975643, guid: 1ee391d23f87af648b06849a44384cd6, type: 3}
   - Name: cube
     Guid: 371318b33a482b748837012558c2d6a8
     Asset: {fileID: 1113009972724136751, guid: 371318b33a482b748837012558c2d6a8, type: 3}

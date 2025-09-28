@@ -10,8 +10,8 @@ public class PatternSpawner : MonoBehaviour
     public PrefabBucket prefabBucket;     // CoreUtils provided bucket for GameObjects
 
     [Header("Settings")]
-    public int count = 10;
-    public float spacing = 2f;
+    public int count = 31;
+    public float spacing = 7f;
 
     private int _currentPatternIndex;
     private int _currentPrefabIndex;

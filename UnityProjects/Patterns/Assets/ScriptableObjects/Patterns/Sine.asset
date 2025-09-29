@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3939079011c9d9e4a8926f714d83c447, type: 3}
-  m_Name: Pyramid
+  m_Script: {fileID: 11500000, guid: 275322bceb80d1f438b500b18623aa8c, type: 3}
+  m_Name: Sine
   m_EditorClassIdentifier: 
+  amplitude: 2
+  wavelength: 2

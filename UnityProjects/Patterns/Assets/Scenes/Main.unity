@@ -948,8 +948,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patternBucket: {fileID: 11400000, guid: 0c01f594c712c7046bffc28b93614210, type: 2}
   prefabBucket: {fileID: 11400000, guid: a5ad1805329065640b8cb52923883c5b, type: 2}
-  count: 100
-  spacing: 3
+  count: 31
+  spacing: 7
   infoText: {fileID: 33697169}
 --- !u!1 &1588575926
 GameObject:

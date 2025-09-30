@@ -1,0 +1,12 @@
+FileVersion:2
+Type:Static
+Guid:944334C3-4723-CF3D-F12F-BC9639DA624C
+ParentGuid:00000000-0000-0000-0000-000000000000
+Color:(R=0.695450,G=0.728000,B=0.046301,A=1.000000)
+
+/Game/Environments/SpyroReference/Maps/Level_Spyro_Artisans.Level_Spyro_Artisans
+/Game/Environments/SpyroReference/Maps/Level_Spyro_DarkHollow.Level_Spyro_DarkHollow
+/Game/Environments/SpyroReference/Maps/Level_Spyro_StoneHill.Level_Spyro_StoneHill
+/Game/Environments/SpyroReference/Maps/Level_Spyro_SunnyFlight.Level_Spyro_SunnyFlight
+/Game/Environments/SpyroReference/Maps/Level_Spyro_Toasty.Level_Spyro_Toasty
+/Game/Environments/SpyroReference/Maps/Level_Spyro_TownSquare.Level_Spyro_TownSquare

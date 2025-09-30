@@ -1,0 +1,14 @@
+FileVersion:2
+Type:Static
+Guid:C93064C9-4A21-D3AC-AE9E-A3A110B92530
+ParentGuid:00000000-0000-0000-0000-000000000000
+
+/Game/Environments/Adventure/Maps/Level_Gym_AdventureAssets.Level_Gym_AdventureAssets
+/Game/Environments/Dungeons/Maps/Level_Gym_DungeonsAssets.Level_Gym_DungeonsAssets
+/Game/Environments/Knights/Maps/Level_Gym_KnightsAssets.Level_Gym_KnightsAssets
+/Game/Environments/Nature/Maps/Level_Gym_NatureAssets.Level_Gym_NatureAssets
+/Game/Environments/Pirates/Maps/Level_Gym_PiratesAssets.Level_Gym_PiratesAssets
+/Game/Environments/Samurai/Maps/Level_Gym_SamuraiAssets.Level_Gym_SamuraiAssets
+/Game/Environments/Vikings/Maps/Level_Gym_VikingsAssets.Level_Gym_VikingsAssets
+/Game/Environments/Western/Maps/Level_Gym_WesternAssets.Level_Gym_WesternAssets
+/Game/Environments/WesternFrontier/Maps/Level_Gym_WesternFrontierAssets.Level_Gym_WesternFrontierAssets

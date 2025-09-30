@@ -1,0 +1,12 @@
+FileVersion:2
+Type:Static
+Guid:EE2761BF-4FAE-5863-0737-C5A908A4DFCC
+ParentGuid:00000000-0000-0000-0000-000000000000
+Color:(R=0.000000,G=0.238856,B=0.728000,A=1.000000)
+
+/Game/Levels/Gyms/Level_Gym_AI.Level_Gym_AI
+/Game/Levels/Gyms/Level_Gym_GameplayObjects.Level_Gym_GameplayObjects
+/Game/Levels/Gyms/Level_Gym_Locomotion.Level_Gym_Locomotion
+/Game/Levels/Level_MainMenu.Level_MainMenu
+/Game/Levels/Level_Root.Level_Root
+/Game/Levels/Level_Welcome.Level_Welcome

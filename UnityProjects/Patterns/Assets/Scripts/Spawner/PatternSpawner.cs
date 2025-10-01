@@ -13,9 +13,9 @@ public class PatternSpawner : MonoBehaviour
     public int count = 31;
     public float spacing = 7f;
 
-    private int _currentPatternIndex;
-    private int _currentPrefabIndex;
-    private readonly List<GameObject> _spawned = new();
+    public int _currentPatternIndex;
+    public int _currentPrefabIndex;
+    public readonly List<GameObject> _spawned = new();
     
     [Header("UI stuff")]
     public TextMeshProUGUI infoText;
@@ -46,7 +46,7 @@ public class PatternSpawner : MonoBehaviour
         }
     }
 
-    private void Spawn()
+    public void Spawn()
     {
         Clear();
 
@@ -98,7 +98,7 @@ public class PatternSpawner : MonoBehaviour
         UpdateUI();
     }
 
-    private void Clear()
+    public void Clear()
     {
         for (int i = _spawned.Count - 1; i >= 0; i--)
         {
@@ -130,31 +130,63 @@ public class PatternSpawner : MonoBehaviour
         }
     }
 
-    private void NextPattern()
+    public void NextPattern()
     {
         if (patternBucket == null || patternBucket.Items == null || patternBucket.Items.Length == 0) return;
         _currentPatternIndex = (_currentPatternIndex + 1) % patternBucket.Items.Length;
         Spawn();
     }
 
-    private void PreviousPattern()
+    public void PreviousPattern()
     {
         if (patternBucket == null || patternBucket.Items == null || patternBucket.Items.Length == 0) return;
         _currentPatternIndex = (_currentPatternIndex - 1 + patternBucket.Items.Length) % patternBucket.Items.Length;
         Spawn();
     }
 
-    private void NextPrefab()
+    public void NextPrefab()
     {
         if (prefabBucket == null || prefabBucket.Items == null || prefabBucket.Items.Length == 0) return;
         _currentPrefabIndex = (_currentPrefabIndex + 1) % prefabBucket.Items.Length;
         Spawn();
     }
 
-    private void PreviousPrefab()
+    public void PreviousPrefab()
     {
         if (prefabBucket == null || prefabBucket.Items == null || prefabBucket.Items.Length == 0) return;
         _currentPrefabIndex = (_currentPrefabIndex - 1 + prefabBucket.Items.Length) % prefabBucket.Items.Length;
         Spawn();
     }
+    
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        if (!Application.isPlaying)
+        {
+            Clear();
+            Spawn();
+        }
+    }
+#endif
+ /*   
+#if UNITY_EDITOR
+    private void OnDrawGizmosSelected()
+    {
+        if (patternBucket == null || prefabBucket == null) return;
+        if (patternBucket.Items.Length == 0 || prefabBucket.Items.Length == 0) return;
+
+        var pattern = patternBucket.Items[Mathf.Clamp(_currentPatternIndex, 0, patternBucket.Items.Length - 1)];
+        if (pattern == null) return;
+
+        var positions = pattern.GetPositions(count, spacing);
+        Gizmos.color = Color.cyan;
+
+        foreach (var pos in positions)
+        {
+            Gizmos.DrawWireSphere(transform.TransformPoint(pos), 0.2f);
+        }
+    }
+#endif
+*/
+    
 }

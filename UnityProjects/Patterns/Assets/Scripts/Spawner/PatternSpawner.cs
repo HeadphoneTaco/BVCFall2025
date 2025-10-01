@@ -168,12 +168,15 @@ public class PatternSpawner : MonoBehaviour
         }
     }
 #endif
- /*   
+    
+    
 #if UNITY_EDITOR
+    [HideInInspector] public bool ghostPreview = true; // inspector toggle
+
     private void OnDrawGizmosSelected()
     {
-        if (patternBucket == null || prefabBucket == null) return;
-        if (patternBucket.Items.Length == 0 || prefabBucket.Items.Length == 0) return;
+        if (!ghostPreview) return;
+        if (patternBucket == null || patternBucket.Items.Length == 0) return;
 
         var pattern = patternBucket.Items[Mathf.Clamp(_currentPatternIndex, 0, patternBucket.Items.Length - 1)];
         if (pattern == null) return;
@@ -187,6 +190,5 @@ public class PatternSpawner : MonoBehaviour
         }
     }
 #endif
-*/
     
 }

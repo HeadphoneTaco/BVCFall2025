@@ -6,14 +6,38 @@ public class PatternSpawnerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
-        // Draw the default inspector first (shows buckets + settings)
-        DrawDefaultInspector();
-
         PatternSpawner spawner = (PatternSpawner)target;
 
-        EditorGUILayout.Space();
-        EditorGUILayout.LabelField("Pattern Preview Controls", EditorStyles.boldLabel);
+        // Draw default fields (buckets + settings)
+        DrawDefaultInspector();
 
+        EditorGUILayout.Space();
+        EditorGUILayout.LabelField("Preview Controls", EditorStyles.boldLabel);
+
+        // Toggle between Ghost and Real preview
+        spawner.ghostPreview = EditorGUILayout.Toggle("Ghost Preview (Gizmos)", spawner.ghostPreview);
+
+        if (!spawner.ghostPreview)
+        {
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Preview Pattern"))
+            {
+                spawner.Spawn();
+                ForceSceneUpdate();
+            }
+            if (GUILayout.Button("Clear Preview"))
+            {
+                spawner.Clear();
+                ForceSceneUpdate();
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+        else
+        {
+            EditorGUILayout.HelpBox("Ghost Mode: Scene view shows gizmos (wire spheres).\nDisable Ghost Preview to spawn real prefabs.", MessageType.Info);
+        }
+
+        EditorGUILayout.Space();
         EditorGUILayout.BeginHorizontal();
         if (GUILayout.Button("← Previous Pattern"))
         {
@@ -39,28 +63,10 @@ public class PatternSpawnerEditor : Editor
             ForceSceneUpdate();
         }
         EditorGUILayout.EndHorizontal();
-
-        EditorGUILayout.Space();
-        if (GUILayout.Button("Preview Pattern"))
-        {
-            spawner.Spawn();
-            ForceSceneUpdate();
-        }
-
-        if (GUILayout.Button("Clear Preview"))
-        {
-            spawner.Clear();
-            ForceSceneUpdate();
-        }
     }
-    
- 
-
-    
 
     private void ForceSceneUpdate()
     {
-        // Make Unity repaint the Scene view so preview updates immediately
         SceneView.RepaintAll();
         EditorUtility.SetDirty(target);
     }

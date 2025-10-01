@@ -574,8 +574,8 @@ GameObject:
   - component: {fileID: 1182361935}
   - component: {fileID: 1182361934}
   - component: {fileID: 1182361933}
-  - component: {fileID: 1182361932}
   - component: {fileID: 1182361937}
+  - component: {fileID: 1182361938}
   m_Layer: 0
   m_Name: PlayerOrb
   m_TagString: Player
@@ -583,20 +583,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1182361932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182361931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10d077ba1aaa6b9418645f6e4bca388c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 100
 --- !u!135 &1182361933
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -714,6 +700,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1182361938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182361931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10d077ba1aaa6b9418645f6e4bca388c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 10
+  rotationSpeed: 100
 --- !u!1 &1198192195
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,23 +946,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff002466aee75e4a90f6d8b531a9d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 2935085773763224857, guid: 4ec8952e5cdddfb46aaa52be9a3bcb59, type: 3}
-  - {fileID: 7611575429276175120, guid: a9a1d0f0a46682044b05d9834fd99ad9, type: 3}
-  - {fileID: 1113009972724136751, guid: 371318b33a482b748837012558c2d6a8, type: 3}
-  - {fileID: 6476609551476236786, guid: 70fae161b455dcf42878427d8cf954f9, type: 3}
-  - {fileID: 7990649105915180909, guid: 862bafc238b9f6341bda1292e164ea89, type: 3}
-  - {fileID: 5897706988370717299, guid: 09fb704fb45a2cb47b9d0ae08b5d40f5, type: 3}
-  count: 1000
-  spacing: 10
-  patterns:
-  - {fileID: 11400000, guid: 7226c6e758f0eb64e869bb4df101cadf, type: 2}
-  - {fileID: 11400000, guid: bc961a29f5a8f9e46a307967cd3971b3, type: 2}
-  - {fileID: 11400000, guid: a4e3e441bdd92964ea0da76722fad1b0, type: 2}
-  - {fileID: 11400000, guid: 6a9d89728b1026241a43dbac0cd6e7d9, type: 2}
-  - {fileID: 11400000, guid: 212e9df2fed9d654291df18cd2a69511, type: 2}
-  - {fileID: 11400000, guid: 66cad8f0a3e98e841b711bb9fa2a03b3, type: 2}
-  - {fileID: 11400000, guid: 70220c4551687e146a863e4b4269b22f, type: 2}
+  patternBucket: {fileID: 11400000, guid: 0c01f594c712c7046bffc28b93614210, type: 2}
+  prefabBucket: {fileID: 11400000, guid: a5ad1805329065640b8cb52923883c5b, type: 2}
+  count: 97
+  spacing: 13
   infoText: {fileID: 33697169}
 --- !u!1 &1588575926
 GameObject:

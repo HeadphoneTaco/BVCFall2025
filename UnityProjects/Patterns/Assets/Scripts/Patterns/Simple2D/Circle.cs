@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Spawn Patterns/CirclePattern")]
-public class CirclePattern : SimplePatternController
+[CreateAssetMenu(menuName = "Patterns/2D/Circle")]
+public class Circle : PatternBehaviour
 {
     public float radius = 5f;
 

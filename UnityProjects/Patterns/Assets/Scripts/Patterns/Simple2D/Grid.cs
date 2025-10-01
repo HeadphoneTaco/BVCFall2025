@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Spawn Patterns/GridPattern")]
-public class GridPattern : SimplePatternController
+[CreateAssetMenu(menuName = "Patterns/2D/Grid")]
+public class Grid : PatternBehaviour
 {
     //override the abstract
     public override List<Vector3> GetPositions(int count, float spacing)
@@ -17,6 +17,7 @@ public class GridPattern : SimplePatternController
         {
             if (positions.Count >= count) return positions;
             //break out if we reach the count
+            
             //iterate through columns
             for (int j = 0; j < size; j++)
             {

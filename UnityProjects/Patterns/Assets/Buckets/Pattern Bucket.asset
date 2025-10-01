@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7903d8b139150042a54a06ac7ee50f0, type: 3}
+  m_Name: Pattern Bucket
+  m_EditorClassIdentifier: 
+  m_BucketName: 
+  m_Sources:
+  - {fileID: 102900000, guid: ee554e6d9938cee4781fc46ea6f7cd38, type: 3}
+  m_AssetRefs:
+  - Name: sine
+    Guid: 0ec33a2fae3b8a24e8e2c12e5fe5279b
+    Asset: {fileID: 11400000, guid: 0ec33a2fae3b8a24e8e2c12e5fe5279b, type: 2}
+  - Name: helix
+    Guid: 212e9df2fed9d654291df18cd2a69511
+    Asset: {fileID: 11400000, guid: 212e9df2fed9d654291df18cd2a69511, type: 2}
+  - Name: spiral
+    Guid: 6a9d89728b1026241a43dbac0cd6e7d9
+    Asset: {fileID: 11400000, guid: 6a9d89728b1026241a43dbac0cd6e7d9, type: 2}
+  - Name: circle
+    Guid: 7226c6e758f0eb64e869bb4df101cadf
+    Asset: {fileID: 11400000, guid: 7226c6e758f0eb64e869bb4df101cadf, type: 2}
+  m_ManualUpdate: 0

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9905e5f181904194ad6cb66e08c9fccd, type: 3}
+  m_Name: Prefab Bucket
+  m_EditorClassIdentifier: 
+  m_BucketName: 
+  m_Sources:
+  - {fileID: 102900000, guid: 489262d1aeef6fc499dd8c4266b7231d, type: 3}
+  m_AssetRefs:
+  - Name: capsule
+    Guid: 09fb704fb45a2cb47b9d0ae08b5d40f5
+    Asset: {fileID: 5897706988370717299, guid: 09fb704fb45a2cb47b9d0ae08b5d40f5, type: 3}
+  - Name: nogravcylinder
+    Guid: 1ee391d23f87af648b06849a44384cd6
+    Asset: {fileID: 1711308743383975643, guid: 1ee391d23f87af648b06849a44384cd6, type: 3}
+  - Name: cube
+    Guid: 371318b33a482b748837012558c2d6a8
+    Asset: {fileID: 1113009972724136751, guid: 371318b33a482b748837012558c2d6a8, type: 3}
+  - Name: sphere
+    Guid: 4ec8952e5cdddfb46aaa52be9a3bcb59
+    Asset: {fileID: 2935085773763224857, guid: 4ec8952e5cdddfb46aaa52be9a3bcb59, type: 3}
+  - Name: nogravcube
+    Guid: 70fae161b455dcf42878427d8cf954f9
+    Asset: {fileID: 6476609551476236786, guid: 70fae161b455dcf42878427d8cf954f9, type: 3}
+  - Name: cylinder
+    Guid: 862bafc238b9f6341bda1292e164ea89
+    Asset: {fileID: 7990649105915180909, guid: 862bafc238b9f6341bda1292e164ea89, type: 3}
+  - Name: nogravsphere
+    Guid: a9a1d0f0a46682044b05d9834fd99ad9
+    Asset: {fileID: 7611575429276175120, guid: a9a1d0f0a46682044b05d9834fd99ad9, type: 3}
+  m_ManualUpdate: 0

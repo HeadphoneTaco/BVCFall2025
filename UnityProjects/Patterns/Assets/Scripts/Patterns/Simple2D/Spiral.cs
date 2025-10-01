@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Spawn Patterns/SpiralPattern")]
-public class SpiralPattern : SimplePatternController
+[CreateAssetMenu(menuName = "Patterns/2D/Spiral")]
+public class Spiral : PatternBehaviour
 {
     public float radiusStep = 0.5f;
     public float angleStep = 15f; // degrees between objects

@@ -8,14 +8,18 @@ public class PatternSpawnerEditor : Editor
     {
         PatternSpawner spawner = (PatternSpawner)target;
 
-        // Draw default fields (buckets + settings)
+        // Default fields
         DrawDefaultInspector();
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Preview Controls", EditorStyles.boldLabel);
 
-        // Toggle between Ghost and Real preview
+        // Toggles
         spawner.ghostPreview = EditorGUILayout.Toggle("Ghost Preview (Gizmos)", spawner.ghostPreview);
+        spawner.drawLines = EditorGUILayout.Toggle("Draw Lines (Ghost Mode)", spawner.drawLines);
+        spawner.autoSpawn = EditorGUILayout.Toggle("Auto-Spawn (Edit Mode)", spawner.autoSpawn);
+
+        EditorGUILayout.Space();
 
         if (!spawner.ghostPreview)
         {
@@ -30,11 +34,21 @@ public class PatternSpawnerEditor : Editor
                 spawner.Clear();
                 ForceSceneUpdate();
             }
+            if (GUILayout.Button("Manual Refresh"))
+            {
+                spawner.Clear();
+                spawner.Spawn();
+                ForceSceneUpdate();
+            }
             EditorGUILayout.EndHorizontal();
         }
         else
         {
-            EditorGUILayout.HelpBox("Ghost Mode: Scene view shows gizmos (wire spheres).\nDisable Ghost Preview to spawn real prefabs.", MessageType.Info);
+            EditorGUILayout.HelpBox(
+                "Ghost Mode: Scene view shows gizmos (spheres + optional lines).\n" +
+                "Disable Ghost Preview to spawn real prefabs.",
+                MessageType.Info
+            );
         }
 
         EditorGUILayout.Space();

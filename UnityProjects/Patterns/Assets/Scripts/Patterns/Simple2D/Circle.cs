@@ -5,18 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Patterns/2D/Circle")]
 public class Circle : PatternBehaviour
 {
-    public float radius = 5f;
-
-    //override the abstract
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
-        //make list of new positions
+    public override List<Vector3> GetPositions(int count, float spacing) {
         var positions = new List<Vector3>();
-        for (int i = 0; i < count; i++)
-        {
-            float angle = i * Mathf.PI * 2 / count;
-            positions.Add(new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius));
-            //add new positions to list
+        float radius = spacing * (count / (2 * Mathf.PI)); // keeps density manageable
+
+        for (int i = 0; i < count; i++) {
+            float angle = i * Mathf.PI * 2f / count;
+            float x = Mathf.Cos(angle) * radius;
+            float z = Mathf.Sin(angle) * radius;
+            positions.Add(new Vector3(x, 0, z));
         }
         return positions;
     }

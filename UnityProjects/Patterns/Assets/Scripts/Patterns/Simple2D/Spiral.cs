@@ -5,24 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Patterns/2D/Spiral")]
 public class Spiral : PatternBehaviour
 {
-    public float radiusStep = 0.5f;
-    public float angleStep = 15f; // degrees between objects
-
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
+    public override List<Vector3> GetPositions(int count, float spacing) {
         var positions = new List<Vector3>();
-        float angle = 0f;
-        float radius = 0f;
+        float angleStep = Mathf.PI / 6f;  // 30 degrees per step
+        float radiusStep = spacing * 0.5f;
 
-        for (int i = 0; i < count; i++)
-        {
-            float rad = angle * Mathf.Deg2Rad;
-            positions.Add(new Vector3(Mathf.Cos(rad) * radius, 0, Mathf.Sin(rad) * radius));
-
-            angle += angleStep;
-            radius += radiusStep * spacing;
+        for (int i = 0; i < count; i++) {
+            float angle = i * angleStep;
+            float radius = i * radiusStep;
+            float x = Mathf.Cos(angle) * radius;
+            float z = Mathf.Sin(angle) * radius;
+            positions.Add(new Vector3(x, 0, z));
         }
-
         return positions;
     }
 }

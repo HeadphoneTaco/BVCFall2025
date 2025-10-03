@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using CoreUtils.AssetBuckets;
-using TMPro; 
+using TMPro;
+using UnityEditor;
 
 public class PatternSpawner : MonoBehaviour
 {
@@ -97,25 +99,39 @@ public class PatternSpawner : MonoBehaviour
         }
         UpdateUI();
     }
-
     public void Clear()
     {
+        // First clear our tracked list
         for (int i = _spawned.Count - 1; i >= 0; i--)
         {
-            var obj = _spawned[i];
-            if (obj == null) { _spawned.RemoveAt(i); continue; }
-
+            GameObject obj = _spawned[i];
+            if (obj != null)
+            {
 #if UNITY_EDITOR
-            if (!Application.isPlaying)
-                DestroyImmediate(obj);
-            else
-                Destroy(obj);
+                if (!Application.isPlaying)
+                    DestroyImmediate(obj); // edit mode: destroy instantly
+                else
+                    Destroy(obj);
 #else
             Destroy(obj);
 #endif
-            _spawned.RemoveAt(i);
+            }
         }
         _spawned.Clear();
+
+        // Extra safety: clear any leftover children under this spawner
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            Transform child = transform.GetChild(i);
+#if UNITY_EDITOR
+            if (!Application.isPlaying)
+                DestroyImmediate(child.gameObject);
+            else
+                Destroy(child.gameObject);
+#else
+        Destroy(child.gameObject);
+#endif
+        }
     }
     
     //update ui
@@ -129,50 +145,79 @@ public class PatternSpawner : MonoBehaviour
             infoText.text = $"Pattern: {patternName}\nPrefab: {prefabName}";
         }
     }
-
     public void NextPattern()
     {
         if (patternBucket == null || patternBucket.Items == null || patternBucket.Items.Length == 0) return;
         _currentPatternIndex = (_currentPatternIndex + 1) % patternBucket.Items.Length;
         Spawn();
     }
-
     public void PreviousPattern()
     {
         if (patternBucket == null || patternBucket.Items == null || patternBucket.Items.Length == 0) return;
         _currentPatternIndex = (_currentPatternIndex - 1 + patternBucket.Items.Length) % patternBucket.Items.Length;
         Spawn();
     }
-
     public void NextPrefab()
     {
         if (prefabBucket == null || prefabBucket.Items == null || prefabBucket.Items.Length == 0) return;
         _currentPrefabIndex = (_currentPrefabIndex + 1) % prefabBucket.Items.Length;
         Spawn();
     }
-
     public void PreviousPrefab()
     {
         if (prefabBucket == null || prefabBucket.Items == null || prefabBucket.Items.Length == 0) return;
         _currentPrefabIndex = (_currentPrefabIndex - 1 + prefabBucket.Items.Length) % prefabBucket.Items.Length;
         Spawn();
     }
-    
 #if UNITY_EDITOR
+    [HideInInspector] public bool ghostPreview = true;   // Gizmo preview mode
+    [HideInInspector] public bool autoSpawn = false;     // Auto-spawn prefabs in edit mode
+    [HideInInspector] public bool drawLines = true;      // Connect gizmos with lines
+    // Guard so we only schedule one delayed call at a time
+    [NonSerialized] private bool _delayedSpawnScheduled = false;
+    // OnValidate is called during editing (and import), but we MUST NOT instantiate here.
     private void OnValidate()
     {
-        if (!Application.isPlaying)
+        // Only schedule when we want auto-spawn and are NOT in ghost preview
+        if (!Application.isPlaying && autoSpawn && !ghostPreview)
         {
+            ScheduleDelayedSpawn();
+        }
+    }
+    private void ScheduleDelayedSpawn()
+    {
+        if (_delayedSpawnScheduled) return;
+        _delayedSpawnScheduled = true;
+
+        // Delay the actual spawn until after Unity's validation pass finishes
+        EditorApplication.delayCall += DelayedSpawnCallback;
+    }
+    private void DelayedSpawnCallback()
+    {
+        // Clear the flag (so future OnValidate calls can schedule again)
+        _delayedSpawnScheduled = false;
+
+        // Safety checks — bail out if running / compiling / about to change playmode
+        if (this == null) return; // object was destroyed
+        if (Application.isPlaying) return;
+        if (EditorApplication.isPlayingOrWillChangePlaymode) return;
+        if (EditorApplication.isCompiling) {
+            // if compiling, re-schedule when compile finishes
+            ScheduleDelayedSpawn();
+            return;
+        }
+
+        try
+        {
+            // Do not call Spawn directly inside OnValidate; here is delayed and safe.
             Clear();
             Spawn();
         }
+        catch (Exception ex)
+        {
+            Debug.LogException(ex);
+        }
     }
-#endif
-    
-    
-#if UNITY_EDITOR
-    [HideInInspector] public bool ghostPreview = true; // inspector toggle
-
     private void OnDrawGizmosSelected()
     {
         if (!ghostPreview) return;
@@ -182,13 +227,19 @@ public class PatternSpawner : MonoBehaviour
         if (pattern == null) return;
 
         var positions = pattern.GetPositions(count, spacing);
-        Gizmos.color = Color.cyan;
 
-        foreach (var pos in positions)
+        Gizmos.color = Color.cyan;
+        for (int i = 0; i < positions.Count; i++)
         {
-            Gizmos.DrawWireSphere(transform.TransformPoint(pos), 0.2f);
+            Vector3 worldPos = transform.TransformPoint(positions[i]);
+            Gizmos.DrawWireSphere(worldPos, 0.2f);
+
+            if (drawLines && i > 0)
+            {
+                Vector3 prevWorld = transform.TransformPoint(positions[i - 1]);
+                Gizmos.DrawLine(prevWorld, worldPos);
+            }
         }
     }
 #endif
-    
 }

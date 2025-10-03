@@ -9,6 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd9caf0f35aa3df45af7b501ba72e298, type: 3}
-  m_Name: Cube
-  m_EditorClassIdentifier: Assembly-CSharp::Cube
+  m_Script: {fileID: 11500000, guid: 341bf770c93767a44966c55db5f4a3a8, type: 3}
+  m_Name: Recursive Pattern
+  m_EditorClassIdentifier: Assembly-CSharp::RecursivePattern
+  basePattern: {fileID: 0}
+  depth: 2
+  branchCount: 3
+  spacingScale: 0.75

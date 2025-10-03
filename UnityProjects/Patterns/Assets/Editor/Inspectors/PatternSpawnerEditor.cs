@@ -4,6 +4,47 @@ using UnityEngine;
 [CustomEditor(typeof(PatternSpawner))]
 public class PatternSpawnerEditor : Editor
 {
+    private void DrawPatternInspector(PatternBehaviour pattern, string label = null)
+    {
+        if (pattern == null) return;
+
+        EditorGUILayout.Space();
+        if (!string.IsNullOrEmpty(label))
+            EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
+        else
+            EditorGUILayout.LabelField($"Pattern: {pattern.name}", EditorStyles.boldLabel);
+
+        SerializedObject patternSo = new SerializedObject(pattern);
+        SerializedProperty iterator = patternSo.GetIterator();
+
+        bool enterChildren = true;
+        while (iterator.NextVisible(enterChildren))
+        {
+            if (iterator.name == "m_Script") continue; // skip the script reference
+
+            EditorGUILayout.PropertyField(iterator, true);
+
+            // If this property is a PatternBehaviour reference, recurse
+            if (iterator.propertyType == SerializedPropertyType.ObjectReference)
+            {
+                var obj = iterator.objectReferenceValue as PatternBehaviour;
+                if (obj != null)
+                {
+                    EditorGUI.indentLevel++;
+                    DrawPatternInspector(obj, $"Sub-pattern ({iterator.displayName})");
+                    EditorGUI.indentLevel--;
+                }
+            }
+
+            enterChildren = false;
+        }
+
+        if (patternSo.ApplyModifiedProperties())
+        {
+            EditorUtility.SetDirty(pattern);
+        }
+    }
+
     public override void OnInspectorGUI()
     {
         PatternSpawner spawner = (PatternSpawner)target;
@@ -77,23 +118,14 @@ public class PatternSpawnerEditor : Editor
             ForceSceneUpdate();
         }
         EditorGUILayout.EndHorizontal();
-        // --- Show extra fields for RecursivePattern ---
-        if (spawner.patternBucket != null &&
-            spawner.patternBucket.Items.Length > 0 &&
-            spawner.patternBucket.Items[spawner._currentPatternIndex] is RecursivePattern recursive)
+        // --- Inline Pattern Inspector ---
+        if (spawner.patternBucket != null && spawner.patternBucket.Items.Length > 0)
         {
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Recursive Pattern Settings", EditorStyles.boldLabel);
-
-            EditorGUI.BeginChangeCheck();
-            recursive.basePattern = (PatternBehaviour)EditorGUILayout.ObjectField("Base Pattern", recursive.basePattern, typeof(PatternBehaviour), false);
-            recursive.branchCount = EditorGUILayout.IntField("Branch Count", recursive.branchCount);
-            recursive.depth = EditorGUILayout.IntField("Depth", recursive.depth);
-            recursive.spacingScale = EditorGUILayout.FloatField("Spacing Scale", recursive.spacingScale);
-
-            if (EditorGUI.EndChangeCheck())
+            var pattern = spawner.patternBucket.Items[spawner._currentPatternIndex];
+            if (pattern != null)
             {
-                EditorUtility.SetDirty(recursive); // mark asset as changed
+                DrawPatternInspector(pattern);
+
                 if (spawner.autoSpawn && !spawner.ghostPreview)
                 {
                     spawner.Clear();
@@ -102,8 +134,8 @@ public class PatternSpawnerEditor : Editor
                 SceneView.RepaintAll();
             }
         }
-        
     }
+    
 
     private void ForceSceneUpdate()
     {

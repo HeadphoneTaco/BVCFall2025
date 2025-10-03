@@ -77,6 +77,32 @@ public class PatternSpawnerEditor : Editor
             ForceSceneUpdate();
         }
         EditorGUILayout.EndHorizontal();
+        // --- Show extra fields for RecursivePattern ---
+        if (spawner.patternBucket != null &&
+            spawner.patternBucket.Items.Length > 0 &&
+            spawner.patternBucket.Items[spawner._currentPatternIndex] is RecursivePattern recursive)
+        {
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Recursive Pattern Settings", EditorStyles.boldLabel);
+
+            EditorGUI.BeginChangeCheck();
+            recursive.basePattern = (PatternBehaviour)EditorGUILayout.ObjectField("Base Pattern", recursive.basePattern, typeof(PatternBehaviour), false);
+            recursive.branchCount = EditorGUILayout.IntField("Branch Count", recursive.branchCount);
+            recursive.depth = EditorGUILayout.IntField("Depth", recursive.depth);
+            recursive.spacingScale = EditorGUILayout.FloatField("Spacing Scale", recursive.spacingScale);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                EditorUtility.SetDirty(recursive); // mark asset as changed
+                if (spawner.autoSpawn && !spawner.ghostPreview)
+                {
+                    spawner.Clear();
+                    spawner.Spawn();
+                }
+                SceneView.RepaintAll();
+            }
+        }
+        
     }
 
     private void ForceSceneUpdate()

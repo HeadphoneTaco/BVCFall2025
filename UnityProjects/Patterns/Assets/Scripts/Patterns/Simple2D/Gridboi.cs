@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Patterns/2D/Grid")]
-public class Grid : PatternBehaviour
+[CreateAssetMenu(menuName = "Patterns/2D/Gridboi")]
+public class Gridboi : PatternBehaviour
 {
     //override the abstract
     public override List<Vector3> GetPositions(int count, float spacing)

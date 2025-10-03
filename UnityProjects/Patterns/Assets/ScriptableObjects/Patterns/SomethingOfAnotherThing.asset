@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50878a9b6d77cac438a804bfd4fff194, type: 3}
-  m_Name: Grid
-  m_EditorClassIdentifier: Assembly-CSharp::Grid
+  m_Script: {fileID: 11500000, guid: 8fdc5851314f24847a08e57894082b37, type: 3}
+  m_Name: SomethingOfAnotherThing
+  m_EditorClassIdentifier: Assembly-CSharp::SomethingOfAnotherThing
+  parentPattern: {fileID: 0}
+  childPattern: {fileID: 0}
+  childCount: 4

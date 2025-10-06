@@ -31,25 +31,28 @@ namespace FractalVariations.EditorTools
                 return;
 
             int half = _previewResolution / 2;
-
-            // Draw each variation’s contribution separately
-            foreach (var v in set.variations) {
-                if (v == null) continue;
-
-                Handles.color = v.previewColor;
-
-                for (int x = -half; x <= half; x++) {
-                    for (int z = -half; z <= half; z++) {
-                        Vector3 p = new Vector3(x * _previewSpacing, 0, z * _previewSpacing);
-                        Vector3 warped = v.Apply(p); // individual variation only
-
-                        Handles.DrawWireDisc(warped, Vector3.up, _previewSize);
-
-                        if (_showLines)
-                            Handles.DrawLine(p, warped);
-                    }
+            for (int x = -half; x <= half; x++) {
+                for (int z = -half; z <= half; z++) {
+                    Vector3 p = new Vector3(x * _previewSpacing, 0, z * _previewSpacing);
+                    Vector3 warpedSum = Vector3.zero;
+                    float totalWeight = 0f;
+                    Color blended = Color.black;
+                    // Draw each variation’s contribution separately
+                    foreach (var v in set.variations) {
+                        if (v == null) continue;
+                        float w = v.weight;
+                        Vector3 wPos = v.Apply(p) * w;
+                        warpedSum += wPos;
+                        totalWeight += w;
+                        blended += v.previewColor * w; }
+                    if (totalWeight < 1e-5f) continue;
+                    Vector3 finalPos = warpedSum / totalWeight;
+                    Handles.color = blended / totalWeight;
+                    Handles.DrawWireDisc(finalPos, Vector3.up, _previewSize);
+                    if (_showLines) Handles.DrawLine(p, finalPos);
                 }
             }
+            
 
             SceneView.RepaintAll();
         }

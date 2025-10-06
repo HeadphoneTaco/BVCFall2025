@@ -170,9 +170,18 @@ public class PatternSpawner : MonoBehaviour
         Spawn();
     }
 #if UNITY_EDITOR
+    public enum LineMode {
+        None,
+        Sequential,   // connect each point to the next
+        ToCenter,     // connect each point to center
+        GridLike      // connect in approximate square layout (for 2D patterns)
+    }
+    
     [HideInInspector] public bool ghostPreview = true;   // Gizmo preview mode
     [HideInInspector] public bool autoSpawn = false;     // Auto-spawn prefabs in edit mode
     [HideInInspector] public bool drawLines = true;      // Connect gizmos with lines
+    [HideInInspector] public LineMode lineMode = LineMode.Sequential;
+    [HideInInspector] public float gizmoSphereSize = 0.2f;
     // Guard so we only schedule one delayed call at a time
     [NonSerialized] private bool _delayedSpawnScheduled = false;
     // OnValidate is called during editing (and import), but we MUST NOT instantiate here.
@@ -218,28 +227,68 @@ public class PatternSpawner : MonoBehaviour
             Debug.LogException(ex);
         }
     }
-    private void OnDrawGizmosSelected()
+    #if UNITY_EDITOR
+private void OnDrawGizmosSelected()
+{
+    if (!ghostPreview) return;
+    if (patternBucket == null || patternBucket.Items.Length == 0) return;
+
+    var pattern = patternBucket.Items[Mathf.Clamp(_currentPatternIndex, 0, patternBucket.Items.Length - 1)];
+    if (pattern == null) return;
+
+    var positions = pattern.GetPositions(count, spacing);
+    if (positions == null || positions.Count == 0) return;
+
+    Gizmos.color = Color.cyan;
+
+    // Draw spheres
+    for (int i = 0; i < positions.Count; i++)
     {
-        if (!ghostPreview) return;
-        if (patternBucket == null || patternBucket.Items.Length == 0) return;
-
-        var pattern = patternBucket.Items[Mathf.Clamp(_currentPatternIndex, 0, patternBucket.Items.Length - 1)];
-        if (pattern == null) return;
-
-        var positions = pattern.GetPositions(count, spacing);
-
-        Gizmos.color = Color.cyan;
-        for (int i = 0; i < positions.Count; i++)
-        {
-            Vector3 worldPos = transform.TransformPoint(positions[i]);
-            Gizmos.DrawWireSphere(worldPos, 0.2f);
-
-            if (drawLines && i > 0)
-            {
-                Vector3 prevWorld = transform.TransformPoint(positions[i - 1]);
-                Gizmos.DrawLine(prevWorld, worldPos);
-            }
-        }
+        Vector3 worldPos = transform.TransformPoint(positions[i]);
+        Gizmos.DrawWireSphere(worldPos, gizmoSphereSize);
     }
+
+    // Draw lines based on selected mode
+    if (lineMode == LineMode.None || positions.Count < 2) return;
+
+    switch (lineMode)
+    {
+        case LineMode.Sequential:
+            for (int i = 1; i < positions.Count; i++)
+            {
+                Gizmos.DrawLine(transform.TransformPoint(positions[i - 1]),
+                                transform.TransformPoint(positions[i]));
+            }
+            break;
+
+        case LineMode.ToCenter:
+            Vector3 center = transform.position;
+            for (int i = 0; i < positions.Count; i++)
+            {
+                Gizmos.DrawLine(center, transform.TransformPoint(positions[i]));
+            }
+            break;
+
+        case LineMode.GridLike:
+            int side = Mathf.CeilToInt(Mathf.Sqrt(positions.Count));
+            for (int x = 0; x < side; x++)
+            {
+                for (int z = 0; z < side; z++)
+                {
+                    int i = x * side + z;
+                    if (i >= positions.Count) break;
+
+                    Vector3 a = transform.TransformPoint(positions[i]);
+                    if (x + 1 < side && i + side < positions.Count)
+                        Gizmos.DrawLine(a, transform.TransformPoint(positions[i + side]));
+                    if (z + 1 < side && i + 1 < positions.Count)
+                        Gizmos.DrawLine(a, transform.TransformPoint(positions[i + 1]));
+                }
+            }
+            break;
+    }
+}
+#endif
+
 #endif
 }

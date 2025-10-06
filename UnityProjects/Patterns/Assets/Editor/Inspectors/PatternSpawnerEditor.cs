@@ -61,6 +61,18 @@ public class PatternSpawnerEditor : Editor
         spawner.autoSpawn = EditorGUILayout.Toggle("Auto-Spawn (Edit Mode)", spawner.autoSpawn);
 
         EditorGUILayout.Space();
+        EditorGUILayout.LabelField("Gizmo Preview", EditorStyles.boldLabel);
+
+        spawner.gizmoSphereSize = EditorGUILayout.Slider("Sphere Size", spawner.gizmoSphereSize, 0.05f, 1f);
+        spawner.lineMode = (PatternSpawner.LineMode)EditorGUILayout.EnumPopup("Line Mode", spawner.lineMode);
+
+        if (GUILayout.Button("Refresh Gizmos"))
+        {
+            SceneView.RepaintAll();
+        }
+
+        
+        EditorGUILayout.Space();
 
         if (!spawner.ghostPreview)
         {

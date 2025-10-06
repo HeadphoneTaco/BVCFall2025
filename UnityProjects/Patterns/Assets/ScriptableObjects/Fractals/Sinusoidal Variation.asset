@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 975a9765f1a48f7428e673258404bf24, type: 3}
   m_Name: Sinusoidal Variation
   m_EditorClassIdentifier: Assembly-CSharp::SinusoidalVariation
-  weight: 0
+  weight: 1.89
+  previewColor: {r: 0, g: 0.009465694, b: 1, a: 1}
+  editorFoldout: 1

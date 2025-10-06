@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Spiral
   m_EditorClassIdentifier: 
   variationSet: {fileID: 0}
-  angleStep: 11.9
+  angleStep: 12
   radiusStep: 10

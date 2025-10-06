@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341bf770c93767a44966c55db5f4a3a8, type: 3}
   m_Name: Recursive Pattern
   m_EditorClassIdentifier: Assembly-CSharp::RecursivePattern
-  variationSet: {fileID: 0}
-  basePattern: {fileID: 11400000, guid: 212e9df2fed9d654291df18cd2a69511, type: 2}
+  variationSet: {fileID: 11400000, guid: 2f065c6c29c4ac14b898b6d47c4b44e8, type: 2}
+  basePattern: {fileID: 11400000, guid: 6a9d89728b1026241a43dbac0cd6e7d9, type: 2}
   depth: 3
   branchCount: 3
-  spacingScale: 0.83
+  spacingScale: 0.75

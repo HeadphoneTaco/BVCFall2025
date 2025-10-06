@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa7f64c5ae24d0a4490e1ec3355c3eb0, type: 3}
   m_Name: Spherical Variation
   m_EditorClassIdentifier: Assembly-CSharp::SphericalVariation
-  weight: 1
+  weight: 2
+  previewColor: {r: 1, g: 0, b: 0.07298279, a: 1}
+  editorFoldout: 1

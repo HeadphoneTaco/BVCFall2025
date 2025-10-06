@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50878a9b6d77cac438a804bfd4fff194, type: 3}
   m_Name: Gridboi
   m_EditorClassIdentifier: Assembly-CSharp::Grid
+  variationSet: {fileID: 11400000, guid: 2f065c6c29c4ac14b898b6d47c4b44e8, type: 2}

@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a466a5392e18a54796625cc49242701, type: 3}
   m_Name: Variation Set
   m_EditorClassIdentifier: Assembly-CSharp::FractalVariations.VariationSet
-  variations: []
+  variations:
+  - {fileID: 11400000, guid: bb9180c57bc49b14db8b898feb3f95c7, type: 2}
+  - {fileID: 11400000, guid: fab72b4627e5e5a42a3299a271e04347, type: 2}
+  - {fileID: 11400000, guid: d4c729c778bac3b4ea68ae3fb7259ae4, type: 2}

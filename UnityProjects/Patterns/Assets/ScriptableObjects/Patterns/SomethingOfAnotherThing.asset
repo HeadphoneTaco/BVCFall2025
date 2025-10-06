@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SomethingOfAnotherThing
   variationSet: {fileID: 0}
   parentPattern: {fileID: 11400000, guid: 212e9df2fed9d654291df18cd2a69511, type: 2}
-  childPattern: {fileID: 11400000, guid: b2098a94e4602744fa8110b6a4a17ad2, type: 2}
+  childPattern: {fileID: 11400000, guid: 0ec33a2fae3b8a24e8e2c12e5fe5279b, type: 2}
   childCount: 4

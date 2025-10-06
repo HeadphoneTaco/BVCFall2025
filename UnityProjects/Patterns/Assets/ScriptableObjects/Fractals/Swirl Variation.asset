@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b353b5854a320ae45b273bc7b13884dc, type: 3}
   m_Name: Swirl Variation
   m_EditorClassIdentifier: Assembly-CSharp::SwirlVariation
-  weight: 0.54
+  weight: 2
+  previewColor: {r: 0, g: 1, b: 0.065164566, a: 1}
+  editorFoldout: 1

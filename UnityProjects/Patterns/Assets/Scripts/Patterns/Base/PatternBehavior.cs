@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public abstract class PatternBehaviour : ScriptableObject
 {
     public abstract List<Vector3> GetPositions(int count, float spacing);
+    public FractalVariations.VariationSet variationSet;
+
 }
 
 /* Example of a derived class implementing a pattern

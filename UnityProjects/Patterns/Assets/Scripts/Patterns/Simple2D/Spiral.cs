@@ -5,10 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Patterns/2D/Spiral")]
 public class Spiral : PatternBehaviour
 {
+       public float angleStep = Mathf.PI / 1f;  
+       public float radiusStep = 0.5f;
     public override List<Vector3> GetPositions(int count, float spacing) {
         var positions = new List<Vector3>();
-        float angleStep = Mathf.PI / 6f;  // 30 degrees per step
-        float radiusStep = spacing * 0.5f;
 
         for (int i = 0; i < count; i++) {
             float angle = i * angleStep;

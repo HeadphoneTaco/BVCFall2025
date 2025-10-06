@@ -10,7 +10,7 @@ public class SwirlVariation : FractalVariations.Variation
         float cosr = Mathf.Cos(r2);
         //p.x * cosr + p.y * sinr
         //put this y to get a 3D swirl
-        return new Vector3(p.x * sinr - p.y * cosr, 0, p.z
+        return new Vector3(p.x * sinr - p.y * cosr, p.x * cosr + p.y * sinr, p.z
         ) * weight;
     }
 }

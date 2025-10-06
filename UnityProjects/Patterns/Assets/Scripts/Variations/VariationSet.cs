@@ -22,6 +22,7 @@ namespace FractalVariations
                 if (v == null) continue;
                 sum += v.Apply(point);
             }
+            //return sum;
             return sum / variations.Count;
         }
     }

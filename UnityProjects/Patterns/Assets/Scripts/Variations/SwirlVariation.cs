@@ -1,0 +1,17 @@
+using UnityEngine;
+
+[CreateAssetMenu(menuName = "FractalVariations/Swirl")]
+public class SwirlVariation : FractalVariations.Variation
+{
+    public override Vector3 Apply(Vector3 p)
+    {
+        float r2 = p.sqrMagnitude;
+        float sinr = Mathf.Sin(r2);
+        float cosr = Mathf.Cos(r2);
+        return new Vector3(
+            p.x * sinr - p.y * cosr,
+            p.x * cosr + p.y * sinr,
+            p.z
+        ) * weight;
+    }
+}

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7152632e4283c94c9068cae324a4215, type: 3}
   m_Name: Spiral
   m_EditorClassIdentifier: 
-  angleStep: 19
+  variationSet: {fileID: 0}
+  angleStep: 11.9
   radiusStep: 10

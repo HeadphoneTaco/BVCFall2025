@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceec86846bc4c5c4a9ec205155f0a7db, type: 3}
   m_Name: Helix
   m_EditorClassIdentifier: 
-  radius: 48.37
-  heightStep: 3.25
+  variationSet: {fileID: 0}
+  radius: 22.67
+  heightStep: 2.3

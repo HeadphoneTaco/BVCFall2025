@@ -13,9 +13,16 @@ public class Spiral : PatternBehaviour
         for (int i = 0; i < count; i++) {
             float angle = i * angleStep;
             float radius = i * radiusStep;
-            float x = Mathf.Cos(angle) * radius;
-            float z = Mathf.Sin(angle) * radius;
-            positions.Add(new Vector3(x, 0, z));
+            Vector3 p = new Vector3(
+            Mathf.Cos(angle) * radius,
+            0f,
+            Mathf.Sin(angle) * radius
+        );
+            // Apply variation warp before storing
+            if (variationSet != null)
+                p = variationSet.ApplyAll(p);
+
+            positions.Add(p);
         }
         return positions;
     }

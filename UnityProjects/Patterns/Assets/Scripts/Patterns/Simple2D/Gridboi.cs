@@ -15,16 +15,24 @@ public class Gridboi : PatternBehaviour
         //iterate through rows
         for (int i = 0; i < size; i++)
         {
-            if (positions.Count >= count) return positions;
-            //break out if we reach the count
-            
             //iterate through columns
             for (int j = 0; j < size; j++)
             {
-                //add new positions to list
-                positions.Add(new Vector3(j * spacing, 0, i * spacing));
-                if (positions.Count >= count) return positions;
-                //break out if we reach the count
+            if (positions.Count >= count) break;
+            //break out if we reach the count
+            
+            Vector3 p = new Vector3(
+                (i - size / 2f) * spacing,
+                0f, 
+                (j - size / 2f) * spacing
+            );
+            
+            
+            // Apply variation warp before storing
+            if (variationSet != null)
+                p = variationSet.ApplyAll(p);
+
+            positions.Add(p);
             }
         }
         return positions;

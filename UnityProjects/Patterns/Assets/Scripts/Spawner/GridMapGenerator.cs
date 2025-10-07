@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GridMapGenerator : MonoBehaviour {
-    public Tile[,] tiles;
-    [System.Serializable] public enum TileType { Empty, Floor, Wall, Obstacle }
+    [System.Serializable]
+    public enum TileType { Empty, Floor, Wall }
 
     public class Tile {
         public Vector2Int gridPos;
@@ -11,21 +11,37 @@ public class GridMapGenerator : MonoBehaviour {
         public GameObject instance;
     }
 
+    public Tile[,] tiles;
+    
+    [Header("Randomization")]
+    public bool useSeed = false;
+    public int seed = 0;
 
-    public void GenerateGridMap(int width, int height, float obstacleChance = 0.2f) {
+    
+
+    public void GenerateGridMap(int width, int height, float wallChance = 0.2f) {
+        if (useSeed)
+        {
+            Random.InitState(seed);
+        }
+        else
+        {
+            Random.InitState(System.Environment.TickCount);
+        }
+
         tiles = new Tile[width, height];
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 Tile tile = new Tile {
                     gridPos = new Vector2Int(x, y),
-                    type = (Random.value < obstacleChance) ? TileType.Wall : TileType.Floor
+                    type = (Random.value < wallChance) ? TileType.Wall : TileType.Floor
                 };
                 tiles[x, y] = tile;
             }
         }
 
-        EnsureConnected();
+        EnsureConnected(); // make sure it's traversable
     }
 
     private void EnsureConnected() {
@@ -61,10 +77,17 @@ public class GridMapGenerator : MonoBehaviour {
             }
         }
 
-        // Mark unreachable floors as walls
+        // Mark unreachable floor tiles as walls
         for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
                 if (tiles[x, y].type == TileType.Floor && !visited.Contains(new Vector2Int(x, y)))
                     tiles[x, y].type = TileType.Wall;
     }
+    
+    [ContextMenu("Re-roll Seed")]
+    public void RerollSeed() {
+        seed = Random.Range(0, int.MaxValue);
+        GenerateGridMap(20, 20, 0.25f);
+    }
+
 }

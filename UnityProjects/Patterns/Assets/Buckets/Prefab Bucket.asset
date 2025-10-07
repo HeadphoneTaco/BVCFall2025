@@ -14,57 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BucketName: 
   m_Sources:
-  - {fileID: 102900000, guid: 489262d1aeef6fc499dd8c4266b7231d, type: 3}
+  - {fileID: 102900000, guid: d8d29df41cde0514ebe1ce2c0f5954f8, type: 3}
   m_AssetRefs:
-  - Name: cubeplane
-    Guid: 03f430e0eb1acb649a937174bae3c52d
-    Asset: {fileID: 5042495732243200555, guid: 03f430e0eb1acb649a937174bae3c52d, type: 3}
-  - Name: -x+zwallplane
-    Guid: 0d5308cf46cc21e4dba185294b6c5804
-    Asset: {fileID: 3274176065699335231, guid: 0d5308cf46cc21e4dba185294b6c5804, type: 3}
-  - Name: +x+zwallplane
-    Guid: 2024232bc27bfb240ab3e38eee98ac9a
-    Asset: {fileID: 9027107303028776164, guid: 2024232bc27bfb240ab3e38eee98ac9a, type: 3}
-  - Name: cylinderplane
-    Guid: 24d8582516c6dc547a6a06cb0fb66b77
-    Asset: {fileID: 3126589543640997530, guid: 24d8582516c6dc547a6a06cb0fb66b77, type: 3}
-  - Name: prisimplane
-    Guid: 5021aec668f6a2543b5806a04fbf0d58
-    Asset: {fileID: 7318260055235114010, guid: 5021aec668f6a2543b5806a04fbf0d58, type: 3}
-  - Name: -x-zwallplane
-    Guid: 68f16ba2cfcf6d54ca3ccda97978eb44
-    Asset: {fileID: 7088975031818418967, guid: 68f16ba2cfcf6d54ca3ccda97978eb44, type: 3}
-  - Name: coneplane
-    Guid: 6b6208298a94c444e90f737c00ae1d1f
-    Asset: {fileID: 7806318120485136269, guid: 6b6208298a94c444e90f737c00ae1d1f, type: 3}
-  - Name: +x-zwallplane
-    Guid: 6d462c1c621d84943b01c1d38473e282
-    Asset: {fileID: 7419192895465707616, guid: 6d462c1c621d84943b01c1d38473e282, type: 3}
-  - Name: -xwallplane
-    Guid: 7ba8b1012a4be334e97007f0c4ff80c5
-    Asset: {fileID: 6248682509790095224, guid: 7ba8b1012a4be334e97007f0c4ff80c5, type: 3}
-  - Name: -zwallplane
-    Guid: 85ccddf08a0705d4fa2e28788ac7bc7f
-    Asset: {fileID: 2636560514821309899, guid: 85ccddf08a0705d4fa2e28788ac7bc7f, type: 3}
-  - Name: doorplane
-    Guid: 876282b83864c724a9d0546b36956b4c
-    Asset: {fileID: 8202745994446827834, guid: 876282b83864c724a9d0546b36956b4c, type: 3}
-  - Name: torusplane
-    Guid: a7e47338dc3603b438fc98d8a9ae4ba4
-    Asset: {fileID: 5127489486727733627, guid: a7e47338dc3603b438fc98d8a9ae4ba4, type: 3}
-  - Name: capsuleplane
-    Guid: b144b728e4cd6094daa6575f29653c0f
-    Asset: {fileID: 6398319293599265229, guid: b144b728e4cd6094daa6575f29653c0f, type: 3}
-  - Name: sphereplane
-    Guid: bd610512f11422a4b8028606e54b91b0
-    Asset: {fileID: 7789221854771968682, guid: bd610512f11422a4b8028606e54b91b0, type: 3}
-  - Name: stairplane
-    Guid: c5605679ab7257a4c87c5b61661be5f1
-    Asset: {fileID: 5011388833623366670, guid: c5605679ab7257a4c87c5b61661be5f1, type: 3}
-  - Name: +zwallplane
-    Guid: f17727304a5a36a439f333cb4bc73e67
-    Asset: {fileID: 7222084670525928005, guid: f17727304a5a36a439f333cb4bc73e67, type: 3}
-  - Name: +xwallplane
-    Guid: f93d826c41f64354a8707ab95ab00490
-    Asset: {fileID: 6940419736942302033, guid: f93d826c41f64354a8707ab95ab00490, type: 3}
+  - Name: wallplane
+    Guid: 06e37b7649a42f0498ec70ab3afac53d
+    Asset: {fileID: 4257129311980180997, guid: 06e37b7649a42f0498ec70ab3afac53d, type: 3}
+  - Name: floorplane
+    Guid: 58ece32eeb117dd4a8786a6f1a9deede
+    Asset: {fileID: 8696935203519314974, guid: 58ece32eeb117dd4a8786a6f1a9deede, type: 3}
   m_ManualUpdate: 0

@@ -11,6 +11,8 @@ namespace FractalVariations.EditorTools
         private static float _previewSpacing = 1.0f;
         private static float _previewSize = 0.05f;
         private static bool _showLines = true;
+        private static bool _showDisplacement = false;
+
 
         private void OnEnable()
         {
@@ -23,6 +25,7 @@ namespace FractalVariations.EditorTools
         }
 
         private void DrawPreviewInScene(SceneView sceneView) {
+            
             if (Selection.activeObject != target)
                 return;
 
@@ -48,8 +51,20 @@ namespace FractalVariations.EditorTools
                     if (totalWeight < 1e-5f) continue;
                     Vector3 finalPos = warpedSum / totalWeight;
                     Handles.color = blended / totalWeight;
+
+// Sphere at warped point
                     Handles.DrawWireDisc(finalPos, Vector3.up, _previewSize);
-                    if (_showLines) Handles.DrawLine(p, finalPos);
+
+// Optional displacement vector
+                    if (_showDisplacement)
+                    {
+                        Handles.color = Color.Lerp(Color.white, blended / totalWeight, 0.5f);
+                        Handles.DrawAAPolyLine(2f, p, finalPos);
+                    }
+                    else if (_showLines)
+                    {
+                        Handles.DrawLine(p, finalPos);
+                    }
                 }
             }
             
@@ -118,6 +133,8 @@ namespace FractalVariations.EditorTools
     _previewSpacing = EditorGUILayout.Slider("Grid Spacing", _previewSpacing, 0.5f, 2f);
     _previewSize = EditorGUILayout.Slider("Point Size", _previewSize, 0.02f, 0.2f);
     _showLines = EditorGUILayout.Toggle("Show Lines", _showLines);
+    _showDisplacement = EditorGUILayout.Toggle("Show Displacement Arrows", _showDisplacement);
+
 
     if (EditorGUI.EndChangeCheck()) {
         serializedObject.ApplyModifiedProperties();

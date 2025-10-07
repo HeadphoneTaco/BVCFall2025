@@ -146,6 +146,36 @@ public class PatternSpawnerEditor : Editor
                 SceneView.RepaintAll();
             }
         }
+        
+        // --- Variation Weight Controls ---
+        if (spawner.patternBucket != null && spawner.patternBucket.Items.Length > 0)
+        {
+            var pattern = spawner.patternBucket.Items[spawner._currentPatternIndex];
+            if (pattern != null && pattern.variationSet != null)
+            {
+                var set = pattern.variationSet;
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Variation Weights", EditorStyles.boldLabel);
+
+                SerializedObject setSO = new SerializedObject(set);
+                SerializedProperty variationsProp = setSO.FindProperty("variations");
+
+                for (int i = 0; i < variationsProp.arraySize; i++)
+                {
+                    SerializedProperty element = variationsProp.GetArrayElementAtIndex(i);
+                    var v = element.objectReferenceValue as FractalVariations.Variation;
+                    if (v == null) continue;
+
+                    v.weight = EditorGUILayout.Slider(v.name, v.weight, 0f, 5f);
+                }
+
+                if (setSO.ApplyModifiedProperties())
+                {
+                    EditorUtility.SetDirty(set);
+                    SceneView.RepaintAll();
+                }
+            }
+        }
     }
     
 

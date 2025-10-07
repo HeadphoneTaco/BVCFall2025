@@ -26,10 +26,14 @@ public class PatternSpawner : MonoBehaviour
     public int currentPrefabIndex;
     private readonly List<GameObject> _spawned = new();
     
+    public GridMapGenerator gridMapGenerator;
+
+    
+    
+    
     [Header("UI stuff")]
     public TextMeshProUGUI infoText;
     
-
     public void Start()
     {
         Spawn();
@@ -134,7 +138,6 @@ public class PatternSpawner : MonoBehaviour
             var go = Instantiate(chosenPrefab, worldPos, Quaternion.identity, transform);
             _spawned.Add(go);
         }
-
         UpdateUI();
     }
     public void Clear()
@@ -169,6 +172,50 @@ public class PatternSpawner : MonoBehaviour
 #else
         Destroy(child.gameObject);
 #endif
+        }
+    }
+    
+    [ContextMenu("Generate Dungeon")]
+    public void GenerateDungeon()
+    {
+        if (gridMapGenerator == null)
+            gridMapGenerator = GetComponent<GridMapGenerator>();
+
+        if (gridMapGenerator == null)
+        {
+            Debug.LogError("No GridMapGenerator found!");
+            return;
+        }
+
+        // Generate new map
+        gridMapGenerator.GenerateGridMap(20, 20, 0.25f);
+
+        // Then spawn prefabs
+        Clear();
+        var tiles = gridMapGenerator.tiles;
+        if (tiles == null) return;
+
+        int width = tiles.GetLength(0);
+        int height = tiles.GetLength(1);
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                var tile = tiles[x, y];
+                Vector3 worldPos = transform.TransformPoint(new Vector3(x * spacing, 0, y * spacing));
+
+                GameObject prefab = null;
+                switch (tile.type) {
+                    case GridMapGenerator.TileType.Floor:
+                        prefab = prefabBucket.Items[0];
+                        break;
+                    case GridMapGenerator.TileType.Wall:
+                        prefab = prefabBucket.Items[1];
+                        break;
+                }
+
+                if (prefab != null)
+                    tile.instance = Instantiate(prefab, worldPos, Quaternion.identity, transform);
+            }
         }
     }
     

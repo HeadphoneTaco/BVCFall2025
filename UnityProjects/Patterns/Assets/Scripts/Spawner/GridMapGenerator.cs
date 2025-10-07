@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GridMapGenerator : MonoBehaviour {
-    [System.Serializable]
-    public enum TileType { Empty, Floor, Wall, Obstacle }
+    public Tile[,] tiles;
+    [System.Serializable] public enum TileType { Empty, Floor, Wall, Obstacle }
 
     public class Tile {
         public Vector2Int gridPos;
@@ -11,7 +11,6 @@ public class GridMapGenerator : MonoBehaviour {
         public GameObject instance;
     }
 
-    public Tile[,] tiles;
 
     public void GenerateGridMap(int width, int height, float obstacleChance = 0.2f) {
         tiles = new Tile[width, height];

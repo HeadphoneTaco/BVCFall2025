@@ -57,6 +57,11 @@ public class PatternSpawner : MonoBehaviour
         {
             NextPrefab();
         }
+        // R to regenerate dungeon
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            GenerateDungeon();
+        }
     }
 
     public void Spawn()

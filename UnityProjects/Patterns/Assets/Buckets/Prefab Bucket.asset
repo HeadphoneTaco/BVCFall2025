@@ -19,15 +19,27 @@ MonoBehaviour:
   - Name: cubeplane
     Guid: 03f430e0eb1acb649a937174bae3c52d
     Asset: {fileID: 5042495732243200555, guid: 03f430e0eb1acb649a937174bae3c52d, type: 3}
+  - Name: -x+zwallplane
+    Guid: 0d5308cf46cc21e4dba185294b6c5804
+    Asset: {fileID: 3274176065699335231, guid: 0d5308cf46cc21e4dba185294b6c5804, type: 3}
+  - Name: +x+zwallplane
+    Guid: 2024232bc27bfb240ab3e38eee98ac9a
+    Asset: {fileID: 9027107303028776164, guid: 2024232bc27bfb240ab3e38eee98ac9a, type: 3}
   - Name: cylinderplane
     Guid: 24d8582516c6dc547a6a06cb0fb66b77
     Asset: {fileID: 3126589543640997530, guid: 24d8582516c6dc547a6a06cb0fb66b77, type: 3}
   - Name: prisimplane
     Guid: 5021aec668f6a2543b5806a04fbf0d58
     Asset: {fileID: 7318260055235114010, guid: 5021aec668f6a2543b5806a04fbf0d58, type: 3}
+  - Name: -x-zwallplane
+    Guid: 68f16ba2cfcf6d54ca3ccda97978eb44
+    Asset: {fileID: 7088975031818418967, guid: 68f16ba2cfcf6d54ca3ccda97978eb44, type: 3}
   - Name: coneplane
     Guid: 6b6208298a94c444e90f737c00ae1d1f
     Asset: {fileID: 7806318120485136269, guid: 6b6208298a94c444e90f737c00ae1d1f, type: 3}
+  - Name: +x-zwallplane
+    Guid: 6d462c1c621d84943b01c1d38473e282
+    Asset: {fileID: 7419192895465707616, guid: 6d462c1c621d84943b01c1d38473e282, type: 3}
   - Name: -xwallplane
     Guid: 7ba8b1012a4be334e97007f0c4ff80c5
     Asset: {fileID: 6248682509790095224, guid: 7ba8b1012a4be334e97007f0c4ff80c5, type: 3}

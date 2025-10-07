@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275322bceb80d1f438b500b18623aa8c, type: 3}
   m_Name: Sine
   m_EditorClassIdentifier: 
-  variationSet: {fileID: 11400000, guid: 2f065c6c29c4ac14b898b6d47c4b44e8, type: 2}
+  variationSet: {fileID: 0}
   amplitude: 56.5
   wavelength: 2.7

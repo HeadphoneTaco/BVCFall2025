@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e25e6dcd598fdb458912eee347c163f, type: 3}
   m_Name: Sphere
   m_EditorClassIdentifier: Assembly-CSharp::Sphere
-  variationSet: {fileID: 11400000, guid: 2f065c6c29c4ac14b898b6d47c4b44e8, type: 2}
+  variationSet: {fileID: 0}
   radius: 15.4

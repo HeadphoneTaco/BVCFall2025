@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Patterns.Base;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Patterns/2D/Gridboi")]

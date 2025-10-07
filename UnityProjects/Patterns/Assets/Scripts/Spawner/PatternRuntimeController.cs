@@ -9,14 +9,14 @@ public class PatternRuntimeController : MonoBehaviour {
     public bool continuousRefresh = true;
     public float refreshInterval = 0.5f;
 
-    private float refreshTimer;
+    private float _refreshTimer;
 
     void Update() {
         if (spawner == null || spawner.patternBucket == null) return;
 
         // 1️⃣ Animate weights over time
         if (autoAnimateWeights) {
-            var pattern = spawner.patternBucket.Items[spawner._currentPatternIndex];
+            var pattern = spawner.patternBucket.Items[spawner.currentPatternIndex];
             if (pattern != null && pattern.variationSet != null) {
                 foreach (var v in pattern.variationSet.variations) {
                     if (v == null) continue;
@@ -27,9 +27,9 @@ public class PatternRuntimeController : MonoBehaviour {
 
         // 2️⃣ Periodically refresh spawner
         if (continuousRefresh) {
-            refreshTimer += Time.deltaTime;
-            if (refreshTimer >= refreshInterval) {
-                refreshTimer = 0f;
+            _refreshTimer += Time.deltaTime;
+            if (_refreshTimer >= refreshInterval) {
+                _refreshTimer = 0f;
                 spawner.Clear();
                 spawner.Spawn();
             }

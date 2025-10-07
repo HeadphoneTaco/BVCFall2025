@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using CoreUtils.AssetBuckets;
 using TMPro;
 using UnityEditor;
+using Random = UnityEngine.Random;
 
 public class PatternSpawner : MonoBehaviour
 {
@@ -14,10 +15,16 @@ public class PatternSpawner : MonoBehaviour
     [Header("Settings")]
     public int count = 31;
     public float spacing = 7f;
+    
+    [Header("Prefab Options")]
+    public bool randomizePrefabs = true;
+    [Tooltip("Optional: control randomness for repeatable results.")]
+    public bool useSeed;
+    public int randomSeed;
 
-    public int _currentPatternIndex;
-    public int _currentPrefabIndex;
-    public readonly List<GameObject> _spawned = new();
+    public int currentPatternIndex;
+    public int currentPrefabIndex;
+    private readonly List<GameObject> _spawned = new();
     
     [Header("UI stuff")]
     public TextMeshProUGUI infoText;
@@ -65,11 +72,29 @@ public class PatternSpawner : MonoBehaviour
         }
 
         // Clamp indices so edits to bucket length don't crash
-        _currentPatternIndex = Mathf.Clamp(_currentPatternIndex, 0, patternBucket.Items.Length - 1);
-        _currentPrefabIndex  = Mathf.Clamp(_currentPrefabIndex, 0, prefabBucket.Items.Length - 1);
+        currentPatternIndex = Mathf.Clamp(currentPatternIndex, 0, patternBucket.Items.Length - 1);
+        currentPrefabIndex  = Mathf.Clamp(currentPrefabIndex, 0, prefabBucket.Items.Length - 1);
 
-        var pattern = patternBucket.Items[_currentPatternIndex];
-        var prefab  = prefabBucket.Items[_currentPrefabIndex];
+        var pattern = patternBucket.Items[currentPatternIndex];
+        GameObject prefab = null;
+
+        // --- Random or manual prefab selection ---
+        if (prefabBucket != null && prefabBucket.Items.Length > 0)
+        {
+            if (useSeed)
+                Random.InitState(randomSeed);
+
+            if (randomizePrefabs)
+            {
+                int index = Random.Range(0, prefabBucket.Items.Length);
+                prefab = prefabBucket.Items[index];
+            }
+            else
+            {
+                prefab = prefabBucket.Items[Mathf.Clamp(currentPrefabIndex, 0, prefabBucket.Items.Length - 1)];
+            }
+        }
+
 
         if (pattern == null || prefab == null)
         {
@@ -82,7 +107,7 @@ public class PatternSpawner : MonoBehaviour
         {
             positions = pattern.GetPositions(count, spacing) ?? new List<Vector3>();
         }
-        catch (System.Exception ex)
+        catch (Exception ex)
         {
             Debug.LogError($"PatternSpawner: exception when evaluating pattern '{pattern.name}': {ex}");
             return;
@@ -94,9 +119,22 @@ public class PatternSpawner : MonoBehaviour
         {
             Vector3 worldPos = transform.TransformPoint(localPos);
 
-            var go = Instantiate(prefab, worldPos, Quaternion.identity, transform);
+            GameObject chosenPrefab = prefab;
+
+            if (randomizePrefabs && prefabBucket != null && prefabBucket.Items.Length > 0)
+            {
+                if (useSeed)
+                    Random.InitState(randomSeed + localPos.GetHashCode());
+                int index = Random.Range(0, prefabBucket.Items.Length);
+                chosenPrefab = prefabBucket.Items[index];
+            }
+
+            if (chosenPrefab == null) continue;
+
+            var go = Instantiate(chosenPrefab, worldPos, Quaternion.identity, transform);
             _spawned.Add(go);
         }
+
         UpdateUI();
     }
     public void Clear()
@@ -140,33 +178,33 @@ public class PatternSpawner : MonoBehaviour
         //TODO: find less expensive way to do this
         if (infoText != null)
         {
-            string patternName = patternBucket.Items[_currentPatternIndex].name;
-            string prefabName = prefabBucket.Items[_currentPrefabIndex].name;
+            string patternName = patternBucket.Items[currentPatternIndex].name;
+            string prefabName = prefabBucket.Items[currentPrefabIndex].name;
             infoText.text = $"Pattern: {patternName}\nPrefab: {prefabName}";
         }
     }
     public void NextPattern()
     {
         if (patternBucket == null || patternBucket.Items == null || patternBucket.Items.Length == 0) return;
-        _currentPatternIndex = (_currentPatternIndex + 1) % patternBucket.Items.Length;
+        currentPatternIndex = (currentPatternIndex + 1) % patternBucket.Items.Length;
         Spawn();
     }
     public void PreviousPattern()
     {
         if (patternBucket == null || patternBucket.Items == null || patternBucket.Items.Length == 0) return;
-        _currentPatternIndex = (_currentPatternIndex - 1 + patternBucket.Items.Length) % patternBucket.Items.Length;
+        currentPatternIndex = (currentPatternIndex - 1 + patternBucket.Items.Length) % patternBucket.Items.Length;
         Spawn();
     }
     public void NextPrefab()
     {
         if (prefabBucket == null || prefabBucket.Items == null || prefabBucket.Items.Length == 0) return;
-        _currentPrefabIndex = (_currentPrefabIndex + 1) % prefabBucket.Items.Length;
+        currentPrefabIndex = (currentPrefabIndex + 1) % prefabBucket.Items.Length;
         Spawn();
     }
     public void PreviousPrefab()
     {
         if (prefabBucket == null || prefabBucket.Items == null || prefabBucket.Items.Length == 0) return;
-        _currentPrefabIndex = (_currentPrefabIndex - 1 + prefabBucket.Items.Length) % prefabBucket.Items.Length;
+        currentPrefabIndex = (currentPrefabIndex - 1 + prefabBucket.Items.Length) % prefabBucket.Items.Length;
         Spawn();
     }
 #if UNITY_EDITOR
@@ -178,12 +216,12 @@ public class PatternSpawner : MonoBehaviour
     }
     
     [HideInInspector] public bool ghostPreview = true;   // Gizmo preview mode
-    [HideInInspector] public bool autoSpawn = false;     // Auto-spawn prefabs in edit mode
+    [HideInInspector] public bool autoSpawn;     // Auto-spawn prefabs in edit mode
     [HideInInspector] public bool drawLines = true;      // Connect gizmos with lines
     [HideInInspector] public LineMode lineMode = LineMode.Sequential;
     [HideInInspector] public float gizmoSphereSize = 0.2f;
     // Guard so we only schedule one delayed call at a time
-    [NonSerialized] private bool _delayedSpawnScheduled = false;
+    [NonSerialized] private bool _delayedSpawnScheduled;
     // OnValidate is called during editing (and import), but we MUST NOT instantiate here.
     private void OnValidate()
     {
@@ -233,7 +271,7 @@ private void OnDrawGizmosSelected()
     if (!ghostPreview) return;
     if (patternBucket == null || patternBucket.Items.Length == 0) return;
 
-    var pattern = patternBucket.Items[Mathf.Clamp(_currentPatternIndex, 0, patternBucket.Items.Length - 1)];
+    var pattern = patternBucket.Items[Mathf.Clamp(currentPatternIndex, 0, patternBucket.Items.Length - 1)];
     if (pattern == null) return;
 
     var positions = pattern.GetPositions(count, spacing);

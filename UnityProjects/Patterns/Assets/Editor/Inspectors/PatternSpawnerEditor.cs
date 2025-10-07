@@ -133,7 +133,7 @@ public class PatternSpawnerEditor : Editor
         // --- Inline Pattern Inspector ---
         if (spawner.patternBucket != null && spawner.patternBucket.Items.Length > 0)
         {
-            var pattern = spawner.patternBucket.Items[spawner._currentPatternIndex];
+            var pattern = spawner.patternBucket.Items[spawner.currentPatternIndex];
             if (pattern != null)
             {
                 DrawPatternInspector(pattern);
@@ -150,15 +150,15 @@ public class PatternSpawnerEditor : Editor
         // --- Variation Weight Controls ---
         if (spawner.patternBucket != null && spawner.patternBucket.Items.Length > 0)
         {
-            var pattern = spawner.patternBucket.Items[spawner._currentPatternIndex];
+            var pattern = spawner.patternBucket.Items[spawner.currentPatternIndex];
             if (pattern != null && pattern.variationSet != null)
             {
                 var set = pattern.variationSet;
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Variation Weights", EditorStyles.boldLabel);
 
-                SerializedObject setSO = new SerializedObject(set);
-                SerializedProperty variationsProp = setSO.FindProperty("variations");
+                SerializedObject setSo = new SerializedObject(set);
+                SerializedProperty variationsProp = setSo.FindProperty("variations");
 
                 for (int i = 0; i < variationsProp.arraySize; i++)
                 {
@@ -169,13 +169,18 @@ public class PatternSpawnerEditor : Editor
                     v.weight = EditorGUILayout.Slider(v.name, v.weight, 0f, 5f);
                 }
 
-                if (setSO.ApplyModifiedProperties())
+                if (setSo.ApplyModifiedProperties())
                 {
                     EditorUtility.SetDirty(set);
                     SceneView.RepaintAll();
                 }
             }
         }
+        spawner.randomizePrefabs = EditorGUILayout.Toggle("Randomize Prefabs", spawner.randomizePrefabs);
+        spawner.useSeed = EditorGUILayout.Toggle("Use Seed", spawner.useSeed);
+        if (spawner.useSeed)
+            spawner.randomSeed = EditorGUILayout.IntField("Random Seed", spawner.randomSeed);
+        
     }
     
 

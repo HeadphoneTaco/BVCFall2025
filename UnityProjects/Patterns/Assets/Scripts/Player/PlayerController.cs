@@ -21,11 +21,11 @@ namespace Player
             var verticalInput = Input.GetAxis("Vertical");   // W/S or Up/Down Arrow
             var upInput = 0f;
 
-            if (Input.GetKey(KeyCode.Space))
+            if (Input.GetKey(KeyCode.E))
             {
                 upInput = 1f; // Move up
             }
-            else if (Input.GetKey(KeyCode.LeftControl))
+            else if (Input.GetKey(KeyCode.Q))
             {
                 upInput = -1f; // Move down
             }

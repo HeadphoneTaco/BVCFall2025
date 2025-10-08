@@ -12,28 +12,34 @@ namespace Spawner
     public class PatternSpawner : MonoBehaviour
     {
         [Header("Buckets")]
+        [Tooltip("Bucket of patterns to choose from.")]
         public PatternBucket patternBucket;   // typed wrapper from PatternBucket.cs
+        
+        [Tooltip("Bucket of prefabs to spawn.")]
         public PrefabBucket prefabBucket;     // CoreUtils provided bucket for GameObjects
 
         [Header("Settings")]
+        [Tooltip("Number of objects to spawn.")]
         public int count = 31;
+        [Tooltip("Distance between spawned objects.")]
         public float spacing = 7f;
     
         [Header("Prefab Options")]
-        public bool randomizePrefabs = true;
         [Tooltip("Optional: control randomness for repeatable results.")]
+        public bool randomizePrefabs;
         public bool useSeed;
         public int randomSeed;
 
+        [HideInInspector]
         public int currentPatternIndex;
+        [HideInInspector]
         public int currentPrefabIndex;
+        
+        
         private readonly List<GameObject> _spawned = new();
     
         public GridMapGenerator gridMapGenerator;
-
-    
-    
-    
+        
         [Header("UI stuff")]
         public TextMeshProUGUI infoText;
     

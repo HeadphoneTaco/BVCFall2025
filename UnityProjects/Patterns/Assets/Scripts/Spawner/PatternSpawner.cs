@@ -222,6 +222,62 @@ public class PatternSpawner : MonoBehaviour
                     tile.instance = Instantiate(prefab, worldPos, Quaternion.identity, transform);
             }
         }
+        // After spawning floors and marking tile types
+        PlaceWalls();
+    }
+    
+    
+
+    private void PlaceWalls()
+    {
+        var tiles = gridMapGenerator.tiles;
+        int width = tiles.GetLength(0);
+        int height = tiles.GetLength(1);
+
+        // We'll look for edges between floor and wall (or map edge)
+        Vector2Int[] directions = {
+            Vector2Int.up,
+            Vector2Int.right,
+            Vector2Int.down,
+            Vector2Int.left
+        };
+
+        foreach (var tile in tiles)
+        {
+            if (tile.type != GridMapGenerator.TileType.Floor) continue;
+
+            foreach (var dir in directions)
+            {
+                Vector2Int neighbor = tile.gridPos + dir;
+                bool isBoundary = false;
+
+                if (neighbor.x < 0 || neighbor.x >= width || neighbor.y < 0 || neighbor.y >= height)
+                    isBoundary = true;
+                else if (tiles[neighbor.x, neighbor.y].type == GridMapGenerator.TileType.Wall)
+                    isBoundary = true;
+
+                if (isBoundary)
+                {
+                    Vector3 wallPos = transform.TransformPoint(
+                        new Vector3(tile.gridPos.x * spacing, 0, tile.gridPos.y * spacing)
+                        + new Vector3(dir.x, 0, dir.y) * (spacing / 2f)
+                    );
+
+                    // Determine rotation: right=90°, left=270°, up=0°, down=180°
+                    float angle = 0f;
+                    if (dir == Vector2Int.right) angle = 90f;
+                    else if (dir == Vector2Int.left) angle = 270f;
+                    else if (dir == Vector2Int.down) angle = 180f;
+
+                    Quaternion rot = Quaternion.Euler(0, angle, 0);
+
+                    // Spawn thin wall prefab
+                    GameObject wallPrefab = prefabBucket.Items.Length > 1 ? prefabBucket.Items[1] : null;
+                    if (wallPrefab != null)
+                        Instantiate(wallPrefab, wallPos, rot, transform);
+                }
+            }
+        }
     }
     
     //update ui

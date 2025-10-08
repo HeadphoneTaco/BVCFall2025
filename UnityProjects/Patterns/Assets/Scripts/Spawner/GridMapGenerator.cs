@@ -16,18 +16,14 @@ namespace Spawner
         public Tile[,] tiles;
     
         [Header("Randomization")]
-        public bool useSeed = false;
-        public int seed = 0;
-
-    
+        public bool useSeed;
+        public int seed;
 
         public void GenerateGridMap(int width, int height, float wallChance = 0.2f) {
-            if (useSeed)
-            {
+            if (useSeed) {
                 Random.InitState(seed);
             }
-            else
-            {
+            else {
                 Random.InitState(System.Environment.TickCount);
             }
 
@@ -42,7 +38,6 @@ namespace Spawner
                     tiles[x, y] = tile;
                 }
             }
-
             EnsureConnected(); // make sure it's traversable
         }
 
@@ -78,19 +73,11 @@ namespace Spawner
                         queue.Enqueue(next);
                 }
             }
-
             // Mark unreachable floor tiles as walls
             for (int x = 0; x < width; x++)
             for (int y = 0; y < height; y++)
                 if (tiles[x, y].type == TileType.Floor && !visited.Contains(new Vector2Int(x, y)))
                     tiles[x, y].type = TileType.Wall;
         }
-    
-        [ContextMenu("Re-roll Seed")]
-        public void RerollSeed() {
-            seed = Random.Range(0, int.MaxValue);
-            GenerateGridMap(20, 20, 0.25f);
-        }
-
     }
 }

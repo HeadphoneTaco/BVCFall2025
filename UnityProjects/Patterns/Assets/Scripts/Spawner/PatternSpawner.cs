@@ -60,8 +60,8 @@ namespace Spawner
             {
                 NextPrefab();
             }
-            // R to regenerate dungeon
-            if (Input.GetKeyDown(KeyCode.R))
+            // '+' to regenerate dungeon
+            if (Input.GetKeyDown(KeyCode.KeypadPlus))
             {
                 GenerateDungeon();
             }

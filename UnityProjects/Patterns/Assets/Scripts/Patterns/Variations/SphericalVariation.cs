@@ -1,11 +1,14 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "FractalVariations/Spherical")]
-public class SphericalVariation : FractalVariations.Variation
+namespace Patterns.Variations
 {
-    public override Vector3 Apply(Vector3 p)
+    [CreateAssetMenu(menuName = "FractalVariations/Spherical")]
+    public class SphericalVariation : Variation
     {
-        float r2 = p.sqrMagnitude + 1e-6f;
-        return (p / r2) * weight;
+        public override Vector3 Apply(Vector3 p)
+        {
+            float r2 = p.sqrMagnitude + 1e-6f;
+            return (p / r2) * weight;
+        }
     }
 }

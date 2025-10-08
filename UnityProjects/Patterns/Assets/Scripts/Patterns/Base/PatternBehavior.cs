@@ -1,12 +1,15 @@
-using UnityEngine;
 using System.Collections.Generic;
+using Patterns.Variations;
+using UnityEngine;
 
-
-public abstract class PatternBehaviour : ScriptableObject
+namespace Patterns.Base
 {
-    public abstract List<Vector3> GetPositions(int count, float spacing);
-    public FractalVariations.VariationSet variationSet;
+    public abstract class PatternBehaviour : ScriptableObject
+    {
+        public abstract List<Vector3> GetPositions(int count, float spacing);
+        public VariationSet variationSet;
 
+    }
 }
 
 /* Example of a derived class implementing a pattern

@@ -1,3 +1,6 @@
+using Patterns.Base;
+using Patterns.Variations;
+using Spawner;
 using UnityEditor;
 using UnityEngine;
 
@@ -163,7 +166,7 @@ public class PatternSpawnerEditor : Editor
                 for (int i = 0; i < variationsProp.arraySize; i++)
                 {
                     SerializedProperty element = variationsProp.GetArrayElementAtIndex(i);
-                    var v = element.objectReferenceValue as FractalVariations.Variation;
+                    var v = element.objectReferenceValue as Variation;
                     if (v == null) continue;
 
                     v.weight = EditorGUILayout.Slider(v.name, v.weight, 0f, 5f);

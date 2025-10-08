@@ -1,22 +1,26 @@
 using System.Collections.Generic;
+using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Patterns/2D/Sine")]
-public class Sine : PatternBehaviour
+namespace Patterns.Simple2D
 {
-    public float amplitude = 2f;
-    public float wavelength = 2f;
-
-    public override List<Vector3> GetPositions(int count, float spacing)
+    [CreateAssetMenu(menuName = "Patterns/2D/Sine")]
+    public class Sine : PatternBehaviour
     {
-        var positions = new List<Vector3>();
-        for (int i = 0; i < count; i++)
+        public float amplitude = 2f;
+        public float wavelength = 2f;
+
+        public override List<Vector3> GetPositions(int count, float spacing)
         {
-            float x = i * spacing;
-            float y = 0;
-            float z = Mathf.Sin(i / wavelength) * amplitude;
-            positions.Add(new Vector3(x, y, z));
+            var positions = new List<Vector3>();
+            for (int i = 0; i < count; i++)
+            {
+                float x = i * spacing;
+                float y = 0;
+                float z = Mathf.Sin(i / wavelength) * amplitude;
+                positions.Add(new Vector3(x, y, z));
+            }
+            return positions;
         }
-        return positions;
     }
 }

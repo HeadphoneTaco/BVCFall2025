@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace FractalVariations
+namespace Patterns.Variations
 {
     /// <summary>
     /// Base class for all variations (Apophysis-style transforms).

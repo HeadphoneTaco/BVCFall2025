@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FractalVariations
+namespace Patterns.Variations
 {
     /// <summary>
     /// A set of variations blended together, similar to an Apophysis transform.

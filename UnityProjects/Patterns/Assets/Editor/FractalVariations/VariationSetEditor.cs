@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using Patterns.Variations;
 using UnityEngine;
 using UnityEditor;
 

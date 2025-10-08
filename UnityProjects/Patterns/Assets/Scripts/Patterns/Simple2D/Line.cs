@@ -1,16 +1,20 @@
 using System.Collections.Generic;
+using Patterns.Base;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Patterns/2D/Line")]
-public class Line : PatternBehaviour
+namespace Patterns.Simple2D
 {
-    public override List<Vector3> GetPositions(int count, float spacing)
+    [CreateAssetMenu(menuName = "Patterns/2D/Line")]
+    public class Line : PatternBehaviour
     {
-        var positions = new List<Vector3>();
-        for (int i = 0; i < count; i++)
+        public override List<Vector3> GetPositions(int count, float spacing)
         {
-            positions.Add(new Vector3(i * spacing, 0, 0));
+            var positions = new List<Vector3>();
+            for (int i = 0; i < count; i++)
+            {
+                positions.Add(new Vector3(i * spacing, 0, 0));
+            }
+            return positions;
         }
-        return positions;
     }
 }

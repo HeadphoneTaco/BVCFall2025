@@ -1,14 +1,17 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "FractalVariations/Sinusoidal")]
-public class SinusoidalVariation : FractalVariations.Variation
+namespace Patterns.Variations
 {
-    public override Vector3 Apply(Vector3 p)
+    [CreateAssetMenu(menuName = "FractalVariations/Sinusoidal")]
+    public class SinusoidalVariation : Variation
     {
-        return new Vector3(
-            Mathf.Sin(p.x),
-            Mathf.Sin(p.y),
-            Mathf.Sin(p.z)
-        ) * weight;
+        public override Vector3 Apply(Vector3 p)
+        {
+            return new Vector3(
+                Mathf.Sin(p.x),
+                Mathf.Sin(p.y),
+                Mathf.Sin(p.z)
+            ) * weight;
+        }
     }
 }

@@ -9,9 +9,11 @@ namespace Patterns.Base
         public PatternBehaviour basePattern;
 
         [Tooltip("How many recursion levels to spawn.")]
+        [Range(1,5)]
         public int depth = 2;
 
         [Tooltip("How many objects per branch (per recursion step).")]
+        [Range(1,5)]
         public int branchCount = 3;
 
         [Tooltip("Scale spacing each recursion step (e.g. 0.5 halves spacing each level).")]

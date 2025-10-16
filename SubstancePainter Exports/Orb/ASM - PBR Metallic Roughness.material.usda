@@ -1,0 +1,510 @@
+#usda 1.0
+(
+    "Exported from Adobe Substance 3D Painter 11.0.2"
+    defaultPrim = "ScryingOrb_obj"
+)
+
+def "ScryingOrb_obj"
+{
+    def Scope "material"
+    {
+        def Material "holder" (
+            customData = {
+                dictionary adobe = {
+                    dictionary painter = {
+                        asset painterProject_spp = @C:/program files/Adobe/Adobe Substance 3D Painter/resources/starter_assets/templates/ASM - PBR Metallic Roughness.spt@
+                    }
+                }
+            }
+        )
+        {
+            asset inputs:basecolor_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_holder_BaseColor.png@
+            asset inputs:compositedNormalDX_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_holder_Normal.png@
+            asset inputs:height_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_holder_Height.png@
+            asset inputs:metallic_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_holder_Metallic.png@
+            asset inputs:opacity_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_holder_BaseColor.png@
+            asset inputs:roughness_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_holder_Roughness.png@
+            token outputs:adobe:surface.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+
+            def NodeGraph "UsdPreviewSurface"
+            {
+                def Shader "UsdPreviewSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float3 inputs:diffuseColor.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float inputs:ior = 1.5
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    token outputs:displacement
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "diffuseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+
+            def NodeGraph "AdobeStandardMaterial_4_0"
+            {
+                def Shader "AdobeStandardMaterial_4_0Shader"
+                {
+                    uniform token info:id = "AdobeStandardMaterial_4_0"
+                    float3 inputs:baseColor.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float inputs:IOR = 1.5
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "baseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+        }
+
+        def Material "large" (
+            customData = {
+                dictionary adobe = {
+                    dictionary painter = {
+                        asset painterProject_spp = @C:/program files/Adobe/Adobe Substance 3D Painter/resources/starter_assets/templates/ASM - PBR Metallic Roughness.spt@
+                    }
+                }
+            }
+        )
+        {
+            asset inputs:basecolor_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_large_BaseColor.png@
+            asset inputs:compositedNormalDX_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_large_Normal.png@
+            asset inputs:height_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_large_Height.png@
+            asset inputs:metallic_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_large_Metallic.png@
+            asset inputs:opacity_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_large_BaseColor.png@
+            asset inputs:roughness_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_large_Roughness.png@
+            token outputs:adobe:surface.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+
+            def NodeGraph "UsdPreviewSurface"
+            {
+                def Shader "UsdPreviewSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float3 inputs:diffuseColor.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float inputs:ior = 1.5
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    token outputs:displacement
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "diffuseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+
+            def NodeGraph "AdobeStandardMaterial_4_0"
+            {
+                def Shader "AdobeStandardMaterial_4_0Shader"
+                {
+                    uniform token info:id = "AdobeStandardMaterial_4_0"
+                    float3 inputs:baseColor.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float inputs:IOR = 1.5
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "baseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+        }
+
+        def Material "small" (
+            customData = {
+                dictionary adobe = {
+                    dictionary painter = {
+                        asset painterProject_spp = @C:/program files/Adobe/Adobe Substance 3D Painter/resources/starter_assets/templates/ASM - PBR Metallic Roughness.spt@
+                    }
+                }
+            }
+        )
+        {
+            asset inputs:basecolor_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_small_BaseColor.png@
+            asset inputs:compositedNormalDX_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_small_Normal.png@
+            asset inputs:height_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_small_Height.png@
+            asset inputs:metallic_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_small_Metallic.png@
+            asset inputs:opacity_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_small_BaseColor.png@
+            asset inputs:roughness_tex = @ASM - PBR Metallic Roughness_textures/ScryingOrb_small_Roughness.png@
+            token outputs:adobe:surface.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+
+            def NodeGraph "UsdPreviewSurface"
+            {
+                def Shader "UsdPreviewSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float3 inputs:diffuseColor.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float inputs:ior = 1.5
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    token outputs:displacement
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "diffuseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+
+            def NodeGraph "AdobeStandardMaterial_4_0"
+            {
+                def Shader "AdobeStandardMaterial_4_0Shader"
+                {
+                    uniform token info:id = "AdobeStandardMaterial_4_0"
+                    float3 inputs:baseColor.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float inputs:IOR = 1.5
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "baseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+        }
+    }
+
+    over "Base"
+    {
+        over "Base" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </ScryingOrb_obj/material/holder>
+        }
+    }
+
+    over "SmallSphere"
+    {
+        over "SmallSphere" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </ScryingOrb_obj/material/small>
+        }
+    }
+
+    over "LargeSphere"
+    {
+        over "LargeSphere" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </ScryingOrb_obj/material/large>
+        }
+    }
+}
+

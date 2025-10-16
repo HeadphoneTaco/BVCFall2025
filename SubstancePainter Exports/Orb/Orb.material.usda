@@ -1,42 +1,42 @@
 #usda 1.0
 (
     "Exported from Adobe Substance 3D Painter 11.0.2"
-    defaultPrim = "WizardStaff_obj"
+    defaultPrim = "ScryingOrb_obj"
 )
 
-def "WizardStaff_obj"
+def "ScryingOrb_obj"
 {
     def Scope "material"
     {
-        def Material "crystal1" (
+        def Material "holder" (
             customData = {
                 dictionary adobe = {
                     dictionary painter = {
-                        asset painterProject_spp = @C:/Users/m.hardwicke596/Github/BVCFall2025/SubstancePainter Projects/Staff.spp@
+                        asset painterProject_spp = @C:/Users/m.hardwicke596/Github/BVCFall2025/SubstancePainter Projects/Orb.spp@
                     }
                 }
             }
         )
         {
-            asset inputs:basecolor_tex = @Staff_textures/WizardStaff_crystal1_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Staff_textures/WizardStaff_crystal1_Normal.png@
-            asset inputs:height_tex = @Staff_textures/WizardStaff_crystal1_Height.png@
-            asset inputs:metallic_tex = @Staff_textures/WizardStaff_crystal1_Metalness.png@
-            asset inputs:roughness_tex = @Staff_textures/WizardStaff_crystal1_Roughness.png@
-            token outputs:adobe:surface.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
-            token outputs:displacement.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
-            token outputs:surface.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+            asset inputs:basecolor_tex = @Orb_textures/ScryingOrb_holder_BaseColor.png@
+            asset inputs:compositedNormalGL_tex = @Orb_textures/ScryingOrb_holder_Normal.png@
+            asset inputs:height_tex = @Orb_textures/ScryingOrb_holder_Height.png@
+            asset inputs:metallic_tex = @Orb_textures/ScryingOrb_holder_Metalness.png@
+            asset inputs:roughness_tex = @Orb_textures/ScryingOrb_holder_Roughness.png@
+            token outputs:adobe:surface.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
 
             def NodeGraph "UsdPreviewSurface"
             {
                 def Shader "UsdPreviewSurfaceShader"
                 {
                     uniform token info:id = "UsdPreviewSurface"
-                    float3 inputs:diffuseColor.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float3 inputs:diffuseColor.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
                     float inputs:ior = 1.5
-                    float inputs:metallic.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/metallicTextureShader.outputs:r>
-                    normal3f inputs:normal.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/normalTextureShader.outputs:rgb>
-                    float inputs:roughness.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/roughnessTextureShader.outputs:r>
                     token outputs:displacement
                     token outputs:surface
                 }
@@ -51,9 +51,9 @@ def "WizardStaff_obj"
                 def Shader "diffuseColorTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:basecolor_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:basecolor_tex>
                     token inputs:sourceColorSpace = "sRGB"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float3 outputs:rgb
@@ -62,9 +62,9 @@ def "WizardStaff_obj"
                 def Shader "roughnessTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:roughness_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:roughness_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -73,9 +73,9 @@ def "WizardStaff_obj"
                 def Shader "metallicTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:metallic_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:metallic_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -85,10 +85,10 @@ def "WizardStaff_obj"
                 {
                     uniform token info:id = "UsdUVTexture"
                     float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:compositedNormalGL_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:compositedNormalGL_tex>
                     float4 inputs:scale = (2, 2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     normal3f outputs:rgb
@@ -100,11 +100,11 @@ def "WizardStaff_obj"
                 def Shader "AdobeStandardMaterial_4_0Shader"
                 {
                     uniform token info:id = "AdobeStandardMaterial_4_0"
-                    float3 inputs:baseColor.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float3 inputs:baseColor.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
                     float inputs:IOR = 1.5
-                    float inputs:metallic.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
-                    normal3f inputs:normal.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
-                    float inputs:roughness.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
                     token outputs:surface
                 }
 
@@ -118,9 +118,9 @@ def "WizardStaff_obj"
                 def Shader "baseColorTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:basecolor_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:basecolor_tex>
                     token inputs:sourceColorSpace = "sRGB"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float3 outputs:rgb
@@ -129,9 +129,9 @@ def "WizardStaff_obj"
                 def Shader "roughnessTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:roughness_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:roughness_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -140,9 +140,9 @@ def "WizardStaff_obj"
                 def Shader "metallicTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:metallic_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:metallic_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -152,10 +152,10 @@ def "WizardStaff_obj"
                 {
                     uniform token info:id = "UsdUVTexture"
                     float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:compositedNormalGL_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/holder.inputs:compositedNormalGL_tex>
                     float4 inputs:scale = (2, 2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/holder/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     normal3f outputs:rgb
@@ -163,35 +163,35 @@ def "WizardStaff_obj"
             }
         }
 
-        def Material "magicdonuts1" (
+        def Material "large" (
             customData = {
                 dictionary adobe = {
                     dictionary painter = {
-                        asset painterProject_spp = @C:/Users/m.hardwicke596/Github/BVCFall2025/SubstancePainter Projects/Staff.spp@
+                        asset painterProject_spp = @C:/Users/m.hardwicke596/Github/BVCFall2025/SubstancePainter Projects/Orb.spp@
                     }
                 }
             }
         )
         {
-            asset inputs:basecolor_tex = @Staff_textures/WizardStaff_magicdonuts1_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Staff_textures/WizardStaff_magicdonuts1_Normal.png@
-            asset inputs:height_tex = @Staff_textures/WizardStaff_magicdonuts1_Height.png@
-            asset inputs:metallic_tex = @Staff_textures/WizardStaff_magicdonuts1_Metalness.png@
-            asset inputs:roughness_tex = @Staff_textures/WizardStaff_magicdonuts1_Roughness.png@
-            token outputs:adobe:surface.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
-            token outputs:displacement.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
-            token outputs:surface.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+            asset inputs:basecolor_tex = @Orb_textures/ScryingOrb_large_BaseColor.png@
+            asset inputs:compositedNormalGL_tex = @Orb_textures/ScryingOrb_large_Normal.png@
+            asset inputs:height_tex = @Orb_textures/ScryingOrb_large_Height.png@
+            asset inputs:metallic_tex = @Orb_textures/ScryingOrb_large_Metalness.png@
+            asset inputs:roughness_tex = @Orb_textures/ScryingOrb_large_Roughness.png@
+            token outputs:adobe:surface.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
 
             def NodeGraph "UsdPreviewSurface"
             {
                 def Shader "UsdPreviewSurfaceShader"
                 {
                     uniform token info:id = "UsdPreviewSurface"
-                    float3 inputs:diffuseColor.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float3 inputs:diffuseColor.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
                     float inputs:ior = 1.5
-                    float inputs:metallic.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/metallicTextureShader.outputs:r>
-                    normal3f inputs:normal.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/normalTextureShader.outputs:rgb>
-                    float inputs:roughness.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/roughnessTextureShader.outputs:r>
                     token outputs:displacement
                     token outputs:surface
                 }
@@ -206,9 +206,9 @@ def "WizardStaff_obj"
                 def Shader "diffuseColorTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:basecolor_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:basecolor_tex>
                     token inputs:sourceColorSpace = "sRGB"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float3 outputs:rgb
@@ -217,9 +217,9 @@ def "WizardStaff_obj"
                 def Shader "roughnessTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:roughness_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:roughness_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -228,9 +228,9 @@ def "WizardStaff_obj"
                 def Shader "metallicTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:metallic_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:metallic_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -240,10 +240,10 @@ def "WizardStaff_obj"
                 {
                     uniform token info:id = "UsdUVTexture"
                     float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:compositedNormalGL_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:compositedNormalGL_tex>
                     float4 inputs:scale = (2, 2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     normal3f outputs:rgb
@@ -255,11 +255,11 @@ def "WizardStaff_obj"
                 def Shader "AdobeStandardMaterial_4_0Shader"
                 {
                     uniform token info:id = "AdobeStandardMaterial_4_0"
-                    float3 inputs:baseColor.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float3 inputs:baseColor.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
                     float inputs:IOR = 1.5
-                    float inputs:metallic.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
-                    normal3f inputs:normal.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
-                    float inputs:roughness.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
                     token outputs:surface
                 }
 
@@ -273,9 +273,9 @@ def "WizardStaff_obj"
                 def Shader "baseColorTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:basecolor_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:basecolor_tex>
                     token inputs:sourceColorSpace = "sRGB"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float3 outputs:rgb
@@ -284,9 +284,9 @@ def "WizardStaff_obj"
                 def Shader "roughnessTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:roughness_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:roughness_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -295,9 +295,9 @@ def "WizardStaff_obj"
                 def Shader "metallicTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:metallic_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:metallic_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -307,10 +307,10 @@ def "WizardStaff_obj"
                 {
                     uniform token info:id = "UsdUVTexture"
                     float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:compositedNormalGL_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/large.inputs:compositedNormalGL_tex>
                     float4 inputs:scale = (2, 2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/large/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     normal3f outputs:rgb
@@ -318,35 +318,35 @@ def "WizardStaff_obj"
             }
         }
 
-        def Material "staff1" (
+        def Material "small" (
             customData = {
                 dictionary adobe = {
                     dictionary painter = {
-                        asset painterProject_spp = @C:/Users/m.hardwicke596/Github/BVCFall2025/SubstancePainter Projects/Staff.spp@
+                        asset painterProject_spp = @C:/Users/m.hardwicke596/Github/BVCFall2025/SubstancePainter Projects/Orb.spp@
                     }
                 }
             }
         )
         {
-            asset inputs:basecolor_tex = @Staff_textures/WizardStaff_staff1_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Staff_textures/WizardStaff_staff1_Normal.png@
-            asset inputs:height_tex = @Staff_textures/WizardStaff_staff1_Height.png@
-            asset inputs:metallic_tex = @Staff_textures/WizardStaff_staff1_Metalness.png@
-            asset inputs:roughness_tex = @Staff_textures/WizardStaff_staff1_Roughness.png@
-            token outputs:adobe:surface.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
-            token outputs:displacement.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
-            token outputs:surface.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+            asset inputs:basecolor_tex = @Orb_textures/ScryingOrb_small_BaseColor.png@
+            asset inputs:compositedNormalGL_tex = @Orb_textures/ScryingOrb_small_Normal.png@
+            asset inputs:height_tex = @Orb_textures/ScryingOrb_small_Height.png@
+            asset inputs:metallic_tex = @Orb_textures/ScryingOrb_small_Metalness.png@
+            asset inputs:roughness_tex = @Orb_textures/ScryingOrb_small_Roughness.png@
+            token outputs:adobe:surface.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
 
             def NodeGraph "UsdPreviewSurface"
             {
                 def Shader "UsdPreviewSurfaceShader"
                 {
                     uniform token info:id = "UsdPreviewSurface"
-                    float3 inputs:diffuseColor.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float3 inputs:diffuseColor.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
                     float inputs:ior = 1.5
-                    float inputs:metallic.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/metallicTextureShader.outputs:r>
-                    normal3f inputs:normal.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/normalTextureShader.outputs:rgb>
-                    float inputs:roughness.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/roughnessTextureShader.outputs:r>
                     token outputs:displacement
                     token outputs:surface
                 }
@@ -361,9 +361,9 @@ def "WizardStaff_obj"
                 def Shader "diffuseColorTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:basecolor_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:basecolor_tex>
                     token inputs:sourceColorSpace = "sRGB"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float3 outputs:rgb
@@ -372,9 +372,9 @@ def "WizardStaff_obj"
                 def Shader "roughnessTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:roughness_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:roughness_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -383,9 +383,9 @@ def "WizardStaff_obj"
                 def Shader "metallicTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:metallic_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:metallic_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -395,10 +395,10 @@ def "WizardStaff_obj"
                 {
                     uniform token info:id = "UsdUVTexture"
                     float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:compositedNormalGL_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:compositedNormalGL_tex>
                     float4 inputs:scale = (2, 2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     normal3f outputs:rgb
@@ -410,11 +410,11 @@ def "WizardStaff_obj"
                 def Shader "AdobeStandardMaterial_4_0Shader"
                 {
                     uniform token info:id = "AdobeStandardMaterial_4_0"
-                    float3 inputs:baseColor.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float3 inputs:baseColor.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
                     float inputs:IOR = 1.5
-                    float inputs:metallic.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
-                    normal3f inputs:normal.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
-                    float inputs:roughness.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    float inputs:metallic.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:roughness.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
                     token outputs:surface
                 }
 
@@ -428,9 +428,9 @@ def "WizardStaff_obj"
                 def Shader "baseColorTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:basecolor_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:basecolor_tex>
                     token inputs:sourceColorSpace = "sRGB"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float3 outputs:rgb
@@ -439,9 +439,9 @@ def "WizardStaff_obj"
                 def Shader "roughnessTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:roughness_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:roughness_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -450,9 +450,9 @@ def "WizardStaff_obj"
                 def Shader "metallicTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:metallic_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:metallic_tex>
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     float outputs:r
@@ -462,10 +462,10 @@ def "WizardStaff_obj"
                 {
                     uniform token info:id = "UsdUVTexture"
                     float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:compositedNormalGL_tex>
+                    asset inputs:file.connect = </ScryingOrb_obj/material/small.inputs:compositedNormalGL_tex>
                     float4 inputs:scale = (2, 2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
-                    float2 inputs:st.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    float2 inputs:st.connect = </ScryingOrb_obj/material/small/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
                     token inputs:wrapT = "repeat"
                     normal3f outputs:rgb
@@ -474,33 +474,33 @@ def "WizardStaff_obj"
         }
     }
 
-    over "StaffBody"
+    over "Base"
     {
-        over "StaffBody" (
+        over "Base" (
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </WizardStaff_obj/material/staff1>
+            rel material:binding = </ScryingOrb_obj/material/holder>
         }
     }
 
-    over "StaffEnd"
+    over "SmallSphere"
     {
-        over "StaffEnd" (
+        over "SmallSphere" (
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </WizardStaff_obj/material/crystal1>
+            rel material:binding = </ScryingOrb_obj/material/small>
         }
     }
 
-    over "StaffHead"
+    over "LargeSphere"
     {
-        over "StaffHead" (
+        over "LargeSphere" (
             prepend apiSchemas = ["MaterialBindingAPI"]
         )
         {
-            rel material:binding = </WizardStaff_obj/material/magicdonuts1>
+            rel material:binding = </ScryingOrb_obj/material/large>
         }
     }
 }

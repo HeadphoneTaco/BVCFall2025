@@ -19,9 +19,10 @@ def "SpellBook_obj"
         )
         {
             asset inputs:basecolor_tex = @Book_textures/SpellBook_book_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Book_textures/SpellBook_book_Normal.png@
+            asset inputs:compositedNormalDX_tex = @Book_textures/SpellBook_book_Normal.png@
             asset inputs:height_tex = @Book_textures/SpellBook_book_Height.png@
-            asset inputs:metallic_tex = @Book_textures/SpellBook_book_Metalness.png@
+            asset inputs:metallic_tex = @Book_textures/SpellBook_book_Metallic.png@
+            asset inputs:opacity_tex = @Book_textures/SpellBook_book_BaseColor.png@
             asset inputs:roughness_tex = @Book_textures/SpellBook_book_Roughness.png@
             token outputs:adobe:surface.connect = </SpellBook_obj/material/book/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
             token outputs:displacement.connect = </SpellBook_obj/material/book/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
@@ -84,9 +85,9 @@ def "SpellBook_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </SpellBook_obj/material/book.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </SpellBook_obj/material/book.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </SpellBook_obj/material/book/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -151,9 +152,9 @@ def "SpellBook_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </SpellBook_obj/material/book.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </SpellBook_obj/material/book.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </SpellBook_obj/material/book/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -174,9 +175,10 @@ def "SpellBook_obj"
         )
         {
             asset inputs:basecolor_tex = @Book_textures/SpellBook_flat_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Book_textures/SpellBook_flat_Normal.png@
+            asset inputs:compositedNormalDX_tex = @Book_textures/SpellBook_flat_Normal.png@
             asset inputs:height_tex = @Book_textures/SpellBook_flat_Height.png@
-            asset inputs:metallic_tex = @Book_textures/SpellBook_flat_Metalness.png@
+            asset inputs:metallic_tex = @Book_textures/SpellBook_flat_Metallic.png@
+            asset inputs:opacity_tex = @Book_textures/SpellBook_flat_BaseColor.png@
             asset inputs:roughness_tex = @Book_textures/SpellBook_flat_Roughness.png@
             token outputs:adobe:surface.connect = </SpellBook_obj/material/flat/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
             token outputs:displacement.connect = </SpellBook_obj/material/flat/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
@@ -239,9 +241,9 @@ def "SpellBook_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </SpellBook_obj/material/flat.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </SpellBook_obj/material/flat.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </SpellBook_obj/material/flat/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -306,9 +308,9 @@ def "SpellBook_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </SpellBook_obj/material/flat.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </SpellBook_obj/material/flat.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </SpellBook_obj/material/flat/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -329,9 +331,10 @@ def "SpellBook_obj"
         )
         {
             asset inputs:basecolor_tex = @Book_textures/SpellBook_notch_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Book_textures/SpellBook_notch_Normal.png@
+            asset inputs:compositedNormalDX_tex = @Book_textures/SpellBook_notch_Normal.png@
             asset inputs:height_tex = @Book_textures/SpellBook_notch_Height.png@
-            asset inputs:metallic_tex = @Book_textures/SpellBook_notch_Metalness.png@
+            asset inputs:metallic_tex = @Book_textures/SpellBook_notch_Metallic.png@
+            asset inputs:opacity_tex = @Book_textures/SpellBook_notch_BaseColor.png@
             asset inputs:roughness_tex = @Book_textures/SpellBook_notch_Roughness.png@
             token outputs:adobe:surface.connect = </SpellBook_obj/material/notch/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
             token outputs:displacement.connect = </SpellBook_obj/material/notch/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
@@ -394,9 +397,9 @@ def "SpellBook_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </SpellBook_obj/material/notch.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </SpellBook_obj/material/notch.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </SpellBook_obj/material/notch/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -461,9 +464,9 @@ def "SpellBook_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </SpellBook_obj/material/notch.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </SpellBook_obj/material/notch.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </SpellBook_obj/material/notch/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -484,9 +487,10 @@ def "SpellBook_obj"
         )
         {
             asset inputs:basecolor_tex = @Book_textures/SpellBook_point_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Book_textures/SpellBook_point_Normal.png@
+            asset inputs:compositedNormalDX_tex = @Book_textures/SpellBook_point_Normal.png@
             asset inputs:height_tex = @Book_textures/SpellBook_point_Height.png@
-            asset inputs:metallic_tex = @Book_textures/SpellBook_point_Metalness.png@
+            asset inputs:metallic_tex = @Book_textures/SpellBook_point_Metallic.png@
+            asset inputs:opacity_tex = @Book_textures/SpellBook_point_BaseColor.png@
             asset inputs:roughness_tex = @Book_textures/SpellBook_point_Roughness.png@
             token outputs:adobe:surface.connect = </SpellBook_obj/material/point/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
             token outputs:displacement.connect = </SpellBook_obj/material/point/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
@@ -549,9 +553,9 @@ def "SpellBook_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </SpellBook_obj/material/point.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </SpellBook_obj/material/point.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </SpellBook_obj/material/point/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -616,9 +620,9 @@ def "SpellBook_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </SpellBook_obj/material/point.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </SpellBook_obj/material/point.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </SpellBook_obj/material/point/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -639,9 +643,10 @@ def "SpellBook_obj"
         )
         {
             asset inputs:basecolor_tex = @Book_textures/SpellBook_round_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Book_textures/SpellBook_round_Normal.png@
+            asset inputs:compositedNormalDX_tex = @Book_textures/SpellBook_round_Normal.png@
             asset inputs:height_tex = @Book_textures/SpellBook_round_Height.png@
-            asset inputs:metallic_tex = @Book_textures/SpellBook_round_Metalness.png@
+            asset inputs:metallic_tex = @Book_textures/SpellBook_round_Metallic.png@
+            asset inputs:opacity_tex = @Book_textures/SpellBook_round_BaseColor.png@
             asset inputs:roughness_tex = @Book_textures/SpellBook_round_Roughness.png@
             token outputs:adobe:surface.connect = </SpellBook_obj/material/round/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
             token outputs:displacement.connect = </SpellBook_obj/material/round/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
@@ -704,9 +709,9 @@ def "SpellBook_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </SpellBook_obj/material/round.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </SpellBook_obj/material/round.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </SpellBook_obj/material/round/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -771,9 +776,9 @@ def "SpellBook_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </SpellBook_obj/material/round.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </SpellBook_obj/material/round.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </SpellBook_obj/material/round/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"

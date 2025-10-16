@@ -19,9 +19,10 @@ def "WizardStaff_obj"
         )
         {
             asset inputs:basecolor_tex = @Staff_textures/WizardStaff_crystal1_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Staff_textures/WizardStaff_crystal1_Normal.png@
+            asset inputs:compositedNormalDX_tex = @Staff_textures/WizardStaff_crystal1_Normal.png@
             asset inputs:height_tex = @Staff_textures/WizardStaff_crystal1_Height.png@
-            asset inputs:metallic_tex = @Staff_textures/WizardStaff_crystal1_Metalness.png@
+            asset inputs:metallic_tex = @Staff_textures/WizardStaff_crystal1_Metallic.png@
+            asset inputs:opacity_tex = @Staff_textures/WizardStaff_crystal1_BaseColor.png@
             asset inputs:roughness_tex = @Staff_textures/WizardStaff_crystal1_Roughness.png@
             token outputs:adobe:surface.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
             token outputs:displacement.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
@@ -84,9 +85,9 @@ def "WizardStaff_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </WizardStaff_obj/material/crystal1/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -151,9 +152,9 @@ def "WizardStaff_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </WizardStaff_obj/material/crystal1.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </WizardStaff_obj/material/crystal1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -174,9 +175,10 @@ def "WizardStaff_obj"
         )
         {
             asset inputs:basecolor_tex = @Staff_textures/WizardStaff_magicdonuts1_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Staff_textures/WizardStaff_magicdonuts1_Normal.png@
+            asset inputs:compositedNormalDX_tex = @Staff_textures/WizardStaff_magicdonuts1_Normal.png@
             asset inputs:height_tex = @Staff_textures/WizardStaff_magicdonuts1_Height.png@
-            asset inputs:metallic_tex = @Staff_textures/WizardStaff_magicdonuts1_Metalness.png@
+            asset inputs:metallic_tex = @Staff_textures/WizardStaff_magicdonuts1_Metallic.png@
+            asset inputs:opacity_tex = @Staff_textures/WizardStaff_magicdonuts1_BaseColor.png@
             asset inputs:roughness_tex = @Staff_textures/WizardStaff_magicdonuts1_Roughness.png@
             token outputs:adobe:surface.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
             token outputs:displacement.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
@@ -239,9 +241,9 @@ def "WizardStaff_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </WizardStaff_obj/material/magicdonuts1/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -306,9 +308,9 @@ def "WizardStaff_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </WizardStaff_obj/material/magicdonuts1.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </WizardStaff_obj/material/magicdonuts1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -329,9 +331,10 @@ def "WizardStaff_obj"
         )
         {
             asset inputs:basecolor_tex = @Staff_textures/WizardStaff_staff1_BaseColor.png@
-            asset inputs:compositedNormalGL_tex = @Staff_textures/WizardStaff_staff1_Normal.png@
+            asset inputs:compositedNormalDX_tex = @Staff_textures/WizardStaff_staff1_Normal.png@
             asset inputs:height_tex = @Staff_textures/WizardStaff_staff1_Height.png@
-            asset inputs:metallic_tex = @Staff_textures/WizardStaff_staff1_Metalness.png@
+            asset inputs:metallic_tex = @Staff_textures/WizardStaff_staff1_Metallic.png@
+            asset inputs:opacity_tex = @Staff_textures/WizardStaff_staff1_BaseColor.png@
             asset inputs:roughness_tex = @Staff_textures/WizardStaff_staff1_Roughness.png@
             token outputs:adobe:surface.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
             token outputs:displacement.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
@@ -394,9 +397,9 @@ def "WizardStaff_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </WizardStaff_obj/material/staff1/UsdPreviewSurface/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"
@@ -461,9 +464,9 @@ def "WizardStaff_obj"
                 def Shader "normalTextureShader"
                 {
                     uniform token info:id = "UsdUVTexture"
-                    float4 inputs:bias = (-1, -1, -1, 0)
-                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:compositedNormalGL_tex>
-                    float4 inputs:scale = (2, 2, 2, 1)
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </WizardStaff_obj/material/staff1.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
                     token inputs:sourceColorSpace = "raw"
                     float2 inputs:st.connect = </WizardStaff_obj/material/staff1/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
                     token inputs:wrapS = "repeat"

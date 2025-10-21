@@ -1,26 +1,49 @@
-public class Car
+using System;
+
+/// <summary>
+/// The base class for all vehicles, demonstrating basic properties and methods.
+/// </summary>
+public class Vehicle
 {
     // Private Member Data (Encapsulated)
-    private string _model;
-    private string _color;
-    private float _speed;
+    // Protected fields can be accessed by derived class (Car, Motorcycle etc...)
+    protected string _model;
+    protected string _color;
+    protected float _speed;
+    
+    // Constructor to initialize member data
+    // Default Constructor
+    public Vehicle()
+    {
+        _model = "";
+        _color = "Red";
+        _speed = 0;
+    }
+
+    // Parameterized Constructor
+    public Vehicle(string model, string color, float speed)
+    {
+        _model = model;
+        _color = color;
+        _speed = speed;
+    }
 
     // Public property to access _model
-    public string Model
+    public virtual string Model
     {
         get { return _model; }
         set { _model = value; }
     }
     
     // Public property to access _color
-    public string Color
+    public virtual string Color
     {
         get { return _color; }
         set { _color = value; }
     }
     
     // Public property to access _speed with validation
-    public float Speed
+    public virtual float Speed
     {
         get => _speed;
         set
@@ -31,15 +54,74 @@ public class Car
             }
             else
             {
-                throw new ArgumentOutOfRangeException("Speed cannot be negative.");
+                throw new ArgumentOutOfRangeException($"Speed cannot be negative.");
             }
         }
     }
-
+    
     // Public Method function
-    public void Info()
+    // A virtual method to display general information
+    // 'Virtual' allows derived classes to change its behavior (Polymorphism)
+    public virtual void Info()
     {
         Console.WriteLine($"Model: {Model}, Color: {Color}, Speed: {_speed} km/h");
+    }
+
+    public virtual void Drive()
+    {
+        Console.WriteLine($"{Model} is driving!");
+    }
+
+    public virtual void Accelerate(int increase)
+    {
+        Speed += increase;  // Uses property to ensure validation
+        Console.WriteLine($"{Model} is moving at {Speed} km/h.");
+    }
+}
+
+/// <summary>
+/// Car inheriting from Vehicle class, acquiring all its properties and methods
+/// </summary>
+
+
+public class Car : Vehicle
+{
+    // Constructor to initialize member data
+    // Default Constructor
+    //public Car() : base()
+    // Calls base class constructor
+
+    //Car Specific field
+    private int _numberOfDoors;
+
+    public int NumberOfDoors
+    {
+        get { return _numberOfDoors; } 
+        set { _numberOfDoors = value; }
+    }
+
+    //Default Constructor for car, calling the base class constructor with default values
+    public Car() :base("Unknown Car", "Red", 0f)
+    {
+        _numberOfDoors = 4;
+    }
+    
+    //Parameterized constructor. 'base' calls the constructor of the parent class (Vehicle)
+    public Car(string model, string color, float speed, int numberOfDoors)
+        : base(model, color, speed)
+    {
+        
+    }
+    
+    
+    // Public Method function
+    // 'override' changes the behavior of the base class method (Polymorphism)
+    public override void Info()
+    {
+        //calls the base class Info method
+        base.Info();
+        // then adds car specific information
+        Console.WriteLine($", Doors: {NumberOfDoors}");
     }
 
     public void Drive()
@@ -58,6 +140,8 @@ class Program
 {
     static void Main(string[] args)
     {
+        /*
+        Console.WriteLine("===== Car 1 =====");
         // Creating an object
         Car myCar = new Car();
         
@@ -67,9 +151,27 @@ class Program
         myCar.Speed = 10f;
         // myCar._speed = -10; // Error: _speed is private and inaccessible
         
-        // Calling a method
+        // Creating an object
         myCar.Info();   // Output - Model: Tesla, Color: Red, Speed: 10 km/h
         myCar.Drive();  // Output - Tesla is driving!
         myCar.Accelerate(5);    // Output - Tesla is moving at 15 km/h
+        
+        Console.WriteLine("===== Car 2 =====");
+        // Creating an object
+        Car myCar2 = new Car("Hyundai", "White", 30f);
+        
+        // Creating an object
+        myCar2.Info();
+        myCar2.Drive();
+        myCar2.Accelerate(5);
+        */
+        
+        //Creating and instance of the car class
+        Car myCar = new Car("tesla", "White", 50f, 4);
+        
+        Console.WriteLine("===== Car =====");
+        // Calls the *overridden* Info method in Car class
+        myCar.Info();
+
     }
 }

@@ -1,5 +1,3 @@
-using System;
-
 /// <summary>
 /// The base class for all vehicles, demonstrating basic properties and methods.
 /// </summary>
@@ -54,7 +52,7 @@ public class Vehicle
             }
             else
             {
-                throw new ArgumentOutOfRangeException($"Speed cannot be negative.");
+                throw new ArgumentOutOfRangeException("Speed cannot be negative.");
             }
         }
     }
@@ -80,60 +78,79 @@ public class Vehicle
 }
 
 /// <summary>
-/// Car inheriting from Vehicle class, acquiring all its properties and methods
+/// Car inherits from Vehicle, acquiring all its properties and methods (Inheritance)
 /// </summary>
-
-
 public class Car : Vehicle
 {
-    // Constructor to initialize member data
-    // Default Constructor
-    //public Car() : base()
-    // Calls base class constructor
-
-    //Car Specific field
+    // Car-specific field
     private int _numberOfDoors;
 
     public int NumberOfDoors
     {
-        get { return _numberOfDoors; } 
+        get { return _numberOfDoors; }
         set { _numberOfDoors = value; }
     }
 
-    //Default Constructor for car, calling the base class constructor with default values
-    public Car() :base("Unknown Car", "Red", 0f)
+    // Default constructor for Car, calling the base class constructor with default values.
+    public Car() : base("Unknow Car", "Red", 0f)
     {
         _numberOfDoors = 4;
     }
     
-    //Parameterized constructor. 'base' calls the constructor of the parent class (Vehicle)
-    public Car(string model, string color, float speed, int numberOfDoors)
-        : base(model, color, speed)
+    // Parameterized constructor. 'base()' calls the corresponding constructor with default values.
+    public Car(string model, string color, float speed, int numberOfDoors) 
+        : base(model, color, speed) // Passes common data (Model, color, speed) to Vehicle's constructor.
     {
-        
+        _numberOfDoors = numberOfDoors;
     }
     
-    
     // Public Method function
-    // 'override' changes the behavior of the base class method (Polymorphism)
+    // 'override' keyword is used to provide a new implementation of the virtual info method (Polymorphism)
     public override void Info()
     {
-        //calls the base class Info method
+        // 'base.Info()' calls the original Info method from the Vehicle class to reuse its output.
         base.Info();
-        // then adds car specific information
+        // Then, it adds the Car-specific information
         Console.WriteLine($", Doors: {NumberOfDoors}");
     }
 
-    public void Drive()
+    // Overriding the Drive method to provide a Car-specific action (Polymorphism)
+    public override void Drive()
     {
-        Console.WriteLine($"{Model} is driving!");
+        Console.WriteLine($"{Model} (Color:{Color}, Doors: {NumberOfDoors}) is a Car and is driving.");
     }
+}
 
-    public void Accelerate(int increase)
+/// <summary>
+/// Motorcycle also inherits from Vehicle (Inheritance)
+/// </summary>
+public class Motorcycle : Vehicle
+{
+    // Motorcycle-specific field
+    private int _numberOfWheels;
+    
+    public int NumberOfWheels
     {
-        Speed += increase;  // Uses property to ensure validation
-        Console.WriteLine($"{Model} is moving at {Speed} km/h.");
+        get { return _numberOfWheels; }
+        set { _numberOfWheels = value; }
     }
+    
+    // Default Constructor for Motorcycle.
+    public Motorcycle() : base("Unknow Bike", "Block", 0f)
+    {
+        _numberOfWheels = 2;
+    }
+    
+    // Parameterized Constructor. Includes a default value for 'numberOfWheels'
+    public Motorcycle(string model, string color, float speed, int numberOfWheels = 2) 
+        : base(model, color, speed) // Passes data to the base class construtor.
+    {
+        _numberOfWheels = numberOfWheels;
+    }
+    
+    // Overriding the Info method to include wheel count (Polymorphism)
+    
+    // Overriding the Drive method to reflect a Mortorcycle action ("Riding") (Polymorphism)
 }
 
 class Program
@@ -166,12 +183,20 @@ class Program
         myCar2.Accelerate(5);
         */
         
-        //Creating and instance of the car class
-        Car myCar = new Car("tesla", "White", 50f, 4);
+        // Creating an instance of the Car class.
+        Car myCar = new Car("Tesla Model 3", "Red", 50f, 4);
         
-        Console.WriteLine("===== Car =====");
-        // Calls the *overridden* Info method in Car class
+        Console.WriteLine("======= Car =======");
+        // Calls the *overridden* Info method in the Car class (Polymorphism)
         myCar.Info();
-
+        // Calls the *inherited* Accelerate method from the Vehicle Class.
+        myCar.Drive();
+        myCar.Accelerate(10);
+        
+        Console.WriteLine("======= Motorcycle =======");
+        // Calls the *overrideen* info method in the Motorcycle class
+        
+        // Calls the *Inherited* Accelerate method from the Vehicle Class.
+        
     }
 }

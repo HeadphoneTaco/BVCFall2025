@@ -1,334 +1,202 @@
-100 dashes wide
-----------------------------------------------------------------------------------------------------
-TODO:ELI5
-
-card types
--Placement, is only played on your turn.
--Attack, is only played on your turn.
--Effect, may be played at any time.
-
---Play area are the white tiles.
---4 Players, use black border.
---3 Players, use grey border.
---Edgewise connected tiles in largest group wins, each tile that is connected at corners is not scored.
---Pieces that are covered by another color do not count towards score
-
-1-Start w 4 cards in hand, **max hand size of 4**
-2-Roll d20 to go first, highest value starts, turns in clockwise order.
-3-One placement and one attack per turn.
-
-
-4-You must draw **up to 4 cards** at end of your turn. eg, if you use a effect card to prevent an attack, you can only draw up to 4 **after your turn is completed**.
-
-6-Last turn is triggered when a player cannot make a **legal move**, everyone else gets one last turn.
-7-Can only play on empty tiles unless attack card specifies otherwise.
-----------------------------------------------------------------------------------------------------
-using UnityEngine;
-public class Spawner : MonoBehaviour
+/// <summary>
+/// The base class for all vehicles, demonstrating basic properties and methods.
+/// </summary>
+public class Vehicle
 {
-    private float _nextSpawnTime;
-    public int count;
-    public int updateFrequency;
-    public GameObject square;
-    public GameObject circle;
-    public GameObject triangle;
-    private void FixedUpdate()
+    // Private Member Data (Encapsulated)
+    // Protected fields can be accessed by derived class (Car, Motorcycle etc...)
+    protected string _model;
+    protected string _color;
+    protected float _speed;
+    
+    // Constructor to initialize member data
+    // Default Constructor
+    public Vehicle()
     {
-        if (!Input.GetKeyDown(KeyCode.Space) || !(Time.time > _nextSpawnTime)) return;
-        count++;
-        CheckCount();
-        _nextSpawnTime = Time.time + updateFrequency;
+        _model = "";
+        _color = "Red";
+        _speed = 0;
+    }
+
+    // Parameterized Constructor
+    public Vehicle(string model, string color, float speed)
+    {
+        _model = model;
+        _color = color;
+        _speed = speed;
+    }
+
+    // Public property to access _model
+    public virtual string Model
+    {
+        get { return _model; }
+        set { _model = value; }
     }
     
-    private void CheckCount()
+    // Public property to access _color
+    public virtual string Color
     {
-        switch (count / 10)
-        {
-            case 0:
-                Instantiate(square);
-                break;
-
-            case 1:
-                Instantiate(circle);
-                break;
-
-            case 2:
-                Instantiate(triangle);
-                break;
-
-            default:
-                count = 0;
-                break;
-        }
-    }
-}
-----------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Spawn Patterns/Spiral")]
-public class SpiralPatternSO : SpawnPatternSO
-{
-    public float radiusStep = 0.5f;
-    public float angleStep = 15f; // degrees between objects
-
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
-        var positions = new List<Vector3>();
-        float angle = 0f;
-        float radius = 0f;
-
-        for (int i = 0; i < count; i++)
-        {
-            float rad = angle * Mathf.Deg2Rad;
-            positions.Add(new Vector3(Mathf.Cos(rad) * radius, 0, Mathf.Sin(rad) * radius));
-
-            angle += angleStep;
-            radius += radiusStep * spacing;
-        }
-
-        return positions;
-    }
-}
-----------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Spawn Patterns/Star")]
-public class StarPatternSO : SpawnPatternSO
-{
-    public int points = 5;
-    public float radius = 5f;
-
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
-        var positions = new List<Vector3>();
-        for (int i = 0; i < count; i++)
-        {
-            int pointIndex = i % points;
-            float angle = (pointIndex * 2 * Mathf.PI) / points;
-            float r = (i / points) % 2 == 0 ? radius : radius * 0.5f; // alternate long/short
-            positions.Add(new Vector3(Mathf.Cos(angle) * r, 0, Mathf.Sin(angle) * r));
-        }
-        return positions;
-    }
-}
-----------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Spawn Patterns/Line")]
-public class LinePatternSO : SpawnPatternSO
-{
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
-        var positions = new List<Vector3>();
-        for (int i = 0; i < count; i++)
-        {
-            positions.Add(new Vector3(i * spacing, 0, 0));
-        }
-        return positions;
-    }
-}
-----------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Spawn Patterns/Wave")]
-public class WavePatternSO : SpawnPatternSO
-{
-    public float amplitude = 2f;
-    public float wavelength = 2f;
-
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
-        var positions = new List<Vector3>();
-        for (int i = 0; i < count; i++)
-        {
-            float x = i * spacing;
-            float y = 0;
-            float z = Mathf.Sin(i / wavelength) * amplitude;
-            positions.Add(new Vector3(x, y, z));
-        }
-        return positions;
-    }
-}
-----------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using UnityEngine;
-[CreateAssetMenu(menuName = "Spawn Patterns/Helix")]
-public class HelixPatternSO : SpawnPatternSO
-{
-    public float radius = 5f;
-    public float heightStep = 0.5f;
-
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
-        var positions = new List<Vector3>();
-
-        for (int i = 0; i < count; i++)
-        {
-            float angle = i * Mathf.PI * 2 / spacing; // wrap around
-            float x = Mathf.Cos(angle) * radius;
-            float y = i * heightStep;
-            float z = Mathf.Sin(angle) * radius;
-
-            positions.Add(new Vector3(x, y, z));
-        }
-
-        return positions;
-    }
-}
-
-----------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using UnityEngine;
-[CreateAssetMenu(menuName = "Spawn Patterns/Cube Grid")]
-public class CubeGridPatternSO : SpawnPatternSO
-{
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
-        var positions = new List<Vector3>();
-        int cubeSize = Mathf.CeilToInt(Mathf.Pow(count, 1f / 3f)); // cube root
-
-        for (int x = 0; x < cubeSize; x++)
-        {
-            for (int y = 0; y < cubeSize; y++)
-            {
-                for (int z = 0; z < cubeSize; z++)
-                {
-                    positions.Add(new Vector3(x * spacing, y * spacing, z * spacing));
-                    if (positions.Count >= count) return positions;
-                }
-            }
-        }
-        return positions;
-    }
-}
-----------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using UnityEngine;
-
-[CreateAssetMenu(menuName = "Spawn Patterns/Sphere Surface")]
-public class SphereSurfacePatternSO : SpawnPatternSO
-{
-    public float radius = 5f;
-
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
-        var positions = new List<Vector3>();
-
-        // Golden angle method for uniform distribution
-        float offset = 2f / count;
-        float increment = Mathf.PI * (3f - Mathf.Sqrt(5f)); 
-
-        for (int i = 0; i < count; i++)
-        {
-            float y = i * offset - 1f + (offset / 2f);
-            float r = Mathf.Sqrt(1f - y * y);
-            float phi = i * increment;
-
-            float x = Mathf.Cos(phi) * r;
-            float z = Mathf.Sin(phi) * r;
-
-            positions.Add(new Vector3(x, y, z) * radius);
-        }
-
-        return positions;
-    }
-}
-----------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using UnityEngine;
-[CreateAssetMenu(menuName = "Spawn Patterns/Random Height Grid")]
-public class RandomHeightGridSO : SpawnPatternSO
-{
-    public float maxHeight = 5f;
-
-    public override List<Vector3> GetPositions(int count, float spacing)
-    {
-        var positions = new List<Vector3>();
-        int side = Mathf.CeilToInt(Mathf.Sqrt(count));
-
-        for (int x = 0; x < side; x++)
-        {
-            for (int z = 0; z < side; z++)
-            {
-                float y = Random.Range(0f, maxHeight);
-                positions.Add(new Vector3(x * spacing, y, z * spacing));
-                if (positions.Count >= count) return positions;
-            }
-        }
-
-        return positions;
-    }
-}
-----------------------------------------------------------------------------------------------------
-
-//From Max and Allan
-
-using UnityEngine;
-
-public class PyramidGenerator : MonoBehaviour
-{
-
-    [SerializeField] private int length = 9;
-    [SerializeField] private GameObject prefab;
-    
-    int count = 0;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        //float fakeLength = 9f;
-        
-        //for (int i = 0; i < fakeLength; i++)
-        //{
-        //    GeneratePyramid(i); 
-        //}
-        for (int i = 0; i < length; i++)
-        {
-            TestGeneratePyramid(i);
-        }
-        
-        
-    }
-
-    private void GeneratePyramid(int y)
-    {
-        int spawnX = length/2;
-        int spawnZ = length/2;
-
-
-        
-        
-        for (int x = 0; x < length; x++)
-        {
-            for (int i = 0; i < length; i++)
-            {
-                Instantiate(prefab, new Vector3(spawnX, y, spawnZ), Quaternion.identity);
-                spawnZ--;
-            }
-
-            spawnX--;
-            spawnZ = length;
-        }
-
-        length--;
+        get { return _color; }
+        set { _color = value; }
     }
     
-    private void TestGeneratePyramid(int y)
+    // Public property to access _speed with validation
+    public virtual float Speed
     {
-        for (int x = count; x < length - y; x++)
+        get => _speed;
+        set
         {
-            for (int i = count; i < length - y; i++)
+            if (value >= 0f)
             {
-                Instantiate(prefab, new Vector3(i, y, x), Quaternion.identity);
+                _speed = value;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Speed cannot be negative.");
             }
         }
+    }
+    
+    // Public Method function
+    // A virtual method to display general information
+    // 'Virtual' allows derived classes to change its behavior (Polymorphism)
+    public virtual void Info()
+    {
+        Console.WriteLine($"Model: {Model}, Color: {Color}, Speed: {_speed} km/h");
+    }
 
-        count++;
-        Debug.Log(count);
+    public virtual void Drive()
+    {
+        Console.WriteLine($"{Model} is driving!");
+    }
+
+    public virtual void Accelerate(int increase)
+    {
+        Speed += increase;  // Uses property to ensure validation
+        Console.WriteLine($"{Model} is moving at {Speed} km/h.");
     }
 }
 
+/// <summary>
+/// Car inherits from Vehicle, acquiring all its properties and methods (Inheritance)
+/// </summary>
+public class Car : Vehicle
+{
+    // Car-specific field
+    private int _numberOfDoors;
 
+    public int NumberOfDoors
+    {
+        get { return _numberOfDoors; }
+        set { _numberOfDoors = value; }
+    }
+
+    // Default constructor for Car, calling the base class constructor with default values.
+    public Car() : base("Unknow Car", "Red", 0f)
+    {
+        _numberOfDoors = 4;
+    }
+    
+    // Parameterized constructor. 'base()' calls the corresponding constructor with default values.
+    public Car(string model, string color, float speed, int numberOfDoors) 
+        : base(model, color, speed) // Passes common data (Model, color, speed) to Vehicle's constructor.
+    {
+        _numberOfDoors = numberOfDoors;
+    }
+    
+    // Public Method function
+    // 'override' keyword is used to provide a new implementation of the virtual info method (Polymorphism)
+    public override void Info()
+    {
+        // 'base.Info()' calls the original Info method from the Vehicle class to reuse its output.
+        base.Info();
+        // Then, it adds the Car-specific information
+        Console.WriteLine($", Doors: {NumberOfDoors}");
+    }
+
+    // Overriding the Drive method to provide a Car-specific action (Polymorphism)
+    public override void Drive()
+    {
+        Console.WriteLine($"{Model} (Color:{Color}, Doors: {NumberOfDoors}) is a Car and is driving.");
+    }
+}
+
+/// <summary>
+/// Motorcycle also inherits from Vehicle (Inheritance)
+/// </summary>
+public class Motorcycle : Vehicle
+{
+    // Motorcycle-specific field
+    private int _numberOfWheels;
+    
+    public int NumberOfWheels
+    {
+        get { return _numberOfWheels; }
+        set { _numberOfWheels = value; }
+    }
+    
+    // Default Constructor for Motorcycle.
+    public Motorcycle() : base("Unknow Bike", "Block", 0f)
+    {
+        _numberOfWheels = 2;
+    }
+    
+    // Parameterized Constructor. Includes a default value for 'numberOfWheels'
+    public Motorcycle(string model, string color, float speed, int numberOfWheels = 2) 
+        : base(model, color, speed) // Passes data to the base class construtor.
+    {
+        _numberOfWheels = numberOfWheels;
+    }
+    
+    // Overriding the Info method to include wheel count (Polymorphism)
+    
+    // Overriding the Drive method to reflect a Mortorcycle action ("Riding") (Polymorphism)
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        /*
+        Console.WriteLine("===== Car 1 =====");
+        // Creating an object
+        Car myCar = new Car();
+        
+        // Setting properties
+        myCar.Model = "Tesla";
+        myCar.Color = "Red";
+        myCar.Speed = 10f;
+        // myCar._speed = -10; // Error: _speed is private and inaccessible
+        
+        // Creating an object
+        myCar.Info();   // Output - Model: Tesla, Color: Red, Speed: 10 km/h
+        myCar.Drive();  // Output - Tesla is driving!
+        myCar.Accelerate(5);    // Output - Tesla is moving at 15 km/h
+        
+        Console.WriteLine("===== Car 2 =====");
+        // Creating an object
+        Car myCar2 = new Car("Hyundai", "White", 30f);
+        
+        // Creating an object
+        myCar2.Info();
+        myCar2.Drive();
+        myCar2.Accelerate(5);
+        */
+        
+        // Creating an instance of the Car class.
+        Car myCar = new Car("Tesla Model 3", "Red", 50f, 4);
+        
+        Console.WriteLine("======= Car =======");
+        // Calls the *overridden* Info method in the Car class (Polymorphism)
+        myCar.Info();
+        // Calls the *inherited* Accelerate method from the Vehicle Class.
+        myCar.Drive();
+        myCar.Accelerate(10);
+        
+        Console.WriteLine("======= Motorcycle =======");
+        // Calls the *overrideen* info method in the Motorcycle class
+        
+        // Calls the *Inherited* Accelerate method from the Vehicle Class.
+        
+    }
+}

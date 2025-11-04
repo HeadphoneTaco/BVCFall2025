@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SomethingOfAnotherThing
   m_EditorClassIdentifier: Assembly-CSharp::SomethingOfAnotherThing
   variationSet: {fileID: 0}
-  parentPattern: {fileID: 11400000, guid: 212e9df2fed9d654291df18cd2a69511, type: 2}
-  childPattern: {fileID: 0}
-  childCount: 4
+  parentPattern: {fileID: 11400000, guid: 7226c6e758f0eb64e869bb4df101cadf, type: 2}
+  childPattern: {fileID: 11400000, guid: 212e9df2fed9d654291df18cd2a69511, type: 2}
+  childCount: 18

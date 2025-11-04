@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Helix
   m_EditorClassIdentifier: 
   variationSet: {fileID: 0}
-  radius: 52.72
+  radius: 15.72
   heightStep: 2.3

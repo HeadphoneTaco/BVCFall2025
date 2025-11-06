@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerFlyingController : MonoBehaviour
     {
         public float moveSpeed = 10f;
         public float rotationSpeed = 100f;
@@ -21,7 +21,7 @@ namespace Player
             var verticalInput = Input.GetAxis("Vertical");   // W/S or Up/Down Arrow
             var upInput = 0f;
 
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.Space))
             {
                 upInput = 1f; // Move up
             }
@@ -35,6 +35,9 @@ namespace Player
 
             // Apply Movement
             transform.position += moveDirection * (moveSpeed * Time.deltaTime);
+            
+            //Freeze rotation on X and Z axis
+            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
 
             // Rotation Input (Mouse Look)
             var mouseX = Input.GetAxis("Mouse X");

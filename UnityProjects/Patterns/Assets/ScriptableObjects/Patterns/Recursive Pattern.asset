@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Recursive Pattern
   m_EditorClassIdentifier: Assembly-CSharp::RecursivePattern
   variationSet: {fileID: 0}
-  basePattern: {fileID: 0}
+  basePattern: {fileID: 11400000, guid: 70220c4551687e146a863e4b4269b22f, type: 2}
   depth: 3
   branchCount: 3
   spacingScale: 0.75

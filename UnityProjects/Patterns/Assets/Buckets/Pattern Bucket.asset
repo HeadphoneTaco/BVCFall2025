@@ -31,6 +31,9 @@ MonoBehaviour:
   - Name: spiral
     Guid: 6a9d89728b1026241a43dbac0cd6e7d9
     Asset: {fileID: 11400000, guid: 6a9d89728b1026241a43dbac0cd6e7d9, type: 2}
+  - Name: cube
+    Guid: 70220c4551687e146a863e4b4269b22f
+    Asset: {fileID: 11400000, guid: 70220c4551687e146a863e4b4269b22f, type: 2}
   - Name: circle
     Guid: 7226c6e758f0eb64e869bb4df101cadf
     Asset: {fileID: 11400000, guid: 7226c6e758f0eb64e869bb4df101cadf, type: 2}

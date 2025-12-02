@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Ground
+  - Bullet
+  - Area
+  - Enemy
+  - "using UnityEngine;\r\n\r\npublic class WeaponRaycast : MonoBehaviour\r\n{\r\n   
+    [SerializeField] private float _weaponRange = 50f;\r\n    [SerializeField] private
+    LayerMask _enemyLayers;\r\n    \r\n    private void Update()\r\n    {\r\n       
+    if (Input.GetButtonDown(\"Fire1\"))\r\n        {\r\n            Shoot();\r\n       
+    }\r\n        \r\n        // Visualise aim\r\n        Debug.DrawRay(transform.position,
+    transform.forward * _weaponRange, Color.yellow);\r\n    }\r\n    \r\n    private
+    void Shoot()\r\n    {\r\n        // Cast ray forward from weapon\r\n        if
+    (Physics.Raycast(transform.position, transform.forward, out var hit, _weaponRange,
+    _enemyLayers))\r\n        {\r\n            // Hit something!\r\n            Debug.Log($\"Hit
+    {hit.collider.name} at distance {hit.distance}\");\r\n        }\r\n    }\r\n}\r\n"
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Enemy
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  m_RenderingLayers:
+  - Default

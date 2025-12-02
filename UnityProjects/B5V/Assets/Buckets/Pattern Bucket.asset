@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7903d8b139150042a54a06ac7ee50f0, type: 3}
+  m_Name: Pattern Bucket
+  m_EditorClassIdentifier: 
+  m_BucketName: 
+  m_Sources:
+  - {fileID: 102900000, guid: ee554e6d9938cee4781fc46ea6f7cd38, type: 3}
+  m_AssetRefs:
+  - Name: sine
+    Guid: 0ec33a2fae3b8a24e8e2c12e5fe5279b
+    Asset: {fileID: 11400000, guid: 0ec33a2fae3b8a24e8e2c12e5fe5279b, type: 2}
+  - Name: recursive pattern
+    Guid: 2a9d3db99dc04d640a6af5422deafb4c
+    Asset: {fileID: 11400000, guid: 2a9d3db99dc04d640a6af5422deafb4c, type: 2}
+  - Name: line
+    Guid: 38b6fdc1084695d4498bbc2c6ecd1bc6
+    Asset: {fileID: 11400000, guid: 38b6fdc1084695d4498bbc2c6ecd1bc6, type: 2}
+  - Name: gridboi
+    Guid: 9098134570566ce499c86475b62afc4a
+    Asset: {fileID: 11400000, guid: 9098134570566ce499c86475b62afc4a, type: 2}
+  m_ManualUpdate: 0

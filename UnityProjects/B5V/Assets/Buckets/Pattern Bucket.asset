@@ -25,6 +25,9 @@ MonoBehaviour:
   - Name: line
     Guid: 38b6fdc1084695d4498bbc2c6ecd1bc6
     Asset: {fileID: 11400000, guid: 38b6fdc1084695d4498bbc2c6ecd1bc6, type: 2}
+  - Name: new line
+    Guid: 8d83b2f1c2bda0c498f1d142c82379fd
+    Asset: {fileID: 11400000, guid: 8d83b2f1c2bda0c498f1d142c82379fd, type: 2}
   - Name: gridboi
     Guid: 9098134570566ce499c86475b62afc4a
     Asset: {fileID: 11400000, guid: 9098134570566ce499c86475b62afc4a, type: 2}

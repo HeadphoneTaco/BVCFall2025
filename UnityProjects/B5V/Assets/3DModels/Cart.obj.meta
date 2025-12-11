@@ -3,7 +3,42 @@ guid: 056d9e20f23198b4b886ad3611787bc1
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cart_ClothMat
+    second: {fileID: 2100000, guid: 35d22becb8a846146970925a329a8f6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cart_FrameMat
+    second: {fileID: 2100000, guid: 46de9248565a35348a33e60677f1f5f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cart_MainMat
+    second: {fileID: 2100000, guid: 326c925263dd15a4792b243c67d3a35d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LeftSideMat
+    second: {fileID: 2100000, guid: 0387be1a383a79547837d3fc28d48d1f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LeftWheelMat
+    second: {fileID: 2100000, guid: d00609275af630143bc3b427fe259aba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RightSideMat
+    second: {fileID: 2100000, guid: 6c217b41b73917c4887d87641718a036, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RightWheelMat
+    second: {fileID: 2100000, guid: f6e9f24685031854ba72f1a71428ec5d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -3,7 +3,72 @@ guid: 0e4151910e733cc4aa125c7376bcf92d
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackWallMat
+    second: {fileID: 2100000, guid: 6fe261c3a3718a34894a87f46c9607b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackWallWoodMat
+    second: {fileID: 2100000, guid: 3c731bf2857bc7b45a0feeeea624f967, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BottomGrindMat
+    second: {fileID: 2100000, guid: c5a55cb0f51fe1f4a9732f97f2c09af0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ChuteMat
+    second: {fileID: 2100000, guid: 7633538aa33f13540bfa729cd0755e7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ChuteWallMat
+    second: {fileID: 2100000, guid: acd075dd940832b4d80e21597c32c57c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FloorMat
+    second: {fileID: 2100000, guid: f08b096c2a98ec54cae90f6401fa74e1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FrontDoorMat
+    second: {fileID: 2100000, guid: 0d5ca13639a83684baef60984083305f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PlatformMat
+    second: {fileID: 2100000, guid: 552eb0f58c698824b854691d134db003, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RoofMat
+    second: {fileID: 2100000, guid: 870241637c5d95d48ac259a8462df9f4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SpinnyMat
+    second: {fileID: 2100000, guid: 7b1232372d36d0f4a8da3191bae20a51, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TopBraceMat
+    second: {fileID: 2100000, guid: 7945985de752e5443b87d8cbe345f13a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TopGrindMat
+    second: {fileID: 2100000, guid: 243d48ee7886f7048a4256bab2b95707, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WallMat
+    second: {fileID: 2100000, guid: 65357d88558e68d4ba5f7f0f4b92b6c1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

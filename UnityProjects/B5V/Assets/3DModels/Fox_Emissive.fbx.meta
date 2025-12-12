@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 45df6113dbe34214d988d18dd15d68c7
+guid: 7ce91181dae50c24687f8f04b20ea7ac
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
@@ -7,13 +7,48 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: EyesMat
-    second: {fileID: 2100000, guid: 9d17184aae757e44792dbca612b66972, type: 2}
+      name: CursedFox1
+    second: {fileID: 2100000, guid: fefa3cf659ac3c04ea8cb2afbf2a2b6c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Fox_FoxMat
-    second: {fileID: 2100000, guid: 0bdb500fc7806764a9f205a42f744813, type: 2}
+      name: Eyeballs1
+    second: {fileID: 2100000, guid: 395817163fe82c046910cc9d4c3bff96, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fox_CursedFox1_BaseColor
+    second: {fileID: 2800000, guid: 7046414a13380c64a988767e8cf0901a, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fox_CursedFox1_Metallic
+    second: {fileID: 2800000, guid: 319f2392aee99bd4b8411ee3f2a5680f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fox_CursedFox1_Roughness
+    second: {fileID: 2800000, guid: 306633024e7035144b272b933b67cbdf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fox_eyeballs1_BaseColor
+    second: {fileID: 2800000, guid: 48afc4f731bec2645bdbaf042f92b0f6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fox_eyeballs1_Emissive
+    second: {fileID: 2800000, guid: 80521b6678e6de94fa3a9fc62b14ec96, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fox_eyeballs1_Metallic
+    second: {fileID: 2800000, guid: c02af356636f3ee4e93d2474f49aa219, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Fox_eyeballs1_Roughness
+    second: {fileID: 2800000, guid: c7ed35b3ddb0086488859e3ac6314387, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -43,7 +78,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.01
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -101,7 +136,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.01
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

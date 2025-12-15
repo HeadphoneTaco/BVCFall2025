@@ -1,0 +1,204 @@
+using System;
+
+/// <summary>
+/// The base class for all vehicles, demonstrating basic properties and methods.
+/// </summary>
+public class Vehicle
+{
+    // Private Member Data (Encapsulated)
+    // Protected fields can be accessed by derived class (Car, Motorcycle etc...)
+    protected string _model;
+    protected string _color;
+    protected float _speed;
+    
+    // Constructor to initialize member data
+    // Default Constructor
+    public Vehicle()
+    {
+        _model = "";
+        _color = "Red";
+        _speed = 0;
+    }
+
+    // Parameterized Constructor
+    public Vehicle(string model, string color, float speed)
+    {
+        _model = model;
+        _color = color;
+        _speed = speed;
+    }
+
+    // Public property to access _model
+    public virtual string Model
+    {
+        get { return _model; }
+        set { _model = value; }
+    }
+    
+    // Public property to access _color
+    public virtual string Color
+    {
+        get { return _color; }
+        set { _color = value; }
+    }
+    
+    // Public property to access _speed with validation
+    public virtual float Speed
+    {
+        get => _speed;
+        set
+        {
+            if (value >= 0f)
+            {
+                _speed = value;
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("Speed cannot be negative.");
+            }
+        }
+    }
+    
+    // Public Method function
+    // A virtual method to display general information
+    // 'Virtual' allows derived classes to change its behavior (Polymorphism)
+    public virtual void Info()
+    {
+        Console.WriteLine($"Model: {Model}, Color: {Color}, Speed: {_speed} km/h");
+    }
+
+    public virtual void Drive()
+    {
+        Console.WriteLine($"{Model} is driving!");
+    }
+
+    public virtual void Accelerate(int increase)
+    {
+        Speed += increase;  // Uses property to ensure validation
+        Console.WriteLine($"{Model} is moving at {Speed} km/h.");
+    }
+}
+
+/// <summary>
+/// Car inherits from Vehicle, acquiring all its properties and methods (Inheritance)
+/// </summary>
+public class Car : Vehicle
+{
+    // Car-specific field
+    private int _numberOfDoors;
+
+    public int NumberOfDoors
+    {
+        get { return _numberOfDoors; }
+        set { _numberOfDoors = value; }
+    }
+
+    // Default constructor for Car, calling the base class constructor with default values.
+    public Car() : base("Unknow Car", "Red", 0f)
+    {
+        _numberOfDoors = 4;
+    }
+    
+    // Parameterized constructor. 'base()' calls the corresponding constructor with default values.
+    public Car(string model, string color, float speed, int numberOfDoors) 
+        : base(model, color, speed) // Passes common data (Model, color, speed) to Vehicle's constructor.
+    {
+        _numberOfDoors = numberOfDoors;
+    }
+    
+    // Public Method function
+    // 'override' keyword is used to provide a new implementation of the virtual info method (Polymorphism)
+    public override void Info()
+    {
+        // 'base.Info()' calls the original Info method from the Vehicle class to reuse its output.
+        base.Info();
+        // Then, it adds the Car-specific information
+        Console.WriteLine($", Doors: {NumberOfDoors}");
+    }
+
+    // Overriding the Drive method to provide a Car-specific action (Polymorphism)
+    public override void Drive()
+    {
+        Console.WriteLine($"{Model} (Color:{Color}, Doors: {NumberOfDoors}) is a Car and is driving.");
+    }
+}
+
+/// <summary>
+/// Motorcycle also inherits from Vehicle (Inheritance)
+/// </summary>
+public class Motorcycle : Vehicle
+{
+    // Motorcycle-specific field
+    private int _numberOfWheels;
+    
+    public int NumberOfWheels
+    {
+        get { return _numberOfWheels; }
+        set { _numberOfWheels = value; }
+    }
+    
+    // Default Constructor for Motorcycle.
+    public Motorcycle() : base("Unknow Bike", "Block", 0f)
+    {
+        _numberOfWheels = 2;
+    }
+    
+    // Parameterized Constructor. Includes a default value for 'numberOfWheels'
+    public Motorcycle(string model, string color, float speed, int numberOfWheels = 2) 
+        : base(model, color, speed) // Passes data to the base class construtor.
+    {
+        _numberOfWheels = numberOfWheels;
+    }
+    
+    // Overriding the Info method to include wheel count (Polymorphism)
+    
+    // Overriding the Drive method to reflect a Mortorcycle action ("Riding") (Polymorphism)
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        /*
+        Console.WriteLine("===== Car 1 =====");
+        // Creating an object
+        Car myCar = new Car();
+        
+        // Setting properties
+        myCar.Model = "Tesla";
+        myCar.Color = "Red";
+        myCar.Speed = 10f;
+        // myCar._speed = -10; // Error: _speed is private and inaccessible
+        
+        // Creating an object
+        myCar.Info();   // Output - Model: Tesla, Color: Red, Speed: 10 km/h
+        myCar.Drive();  // Output - Tesla is driving!
+        myCar.Accelerate(5);    // Output - Tesla is moving at 15 km/h
+        
+        Console.WriteLine("===== Car 2 =====");
+        // Creating an object
+        Car myCar2 = new Car("Hyundai", "White", 30f);
+        
+        // Creating an object
+        myCar2.Info();
+        myCar2.Drive();
+        myCar2.Accelerate(5);
+        */
+        
+        // Creating an instance of the Car class.
+        Car myCar = new Car("Tesla Model 3", "Red", 50f, 4);
+        
+        Console.WriteLine("======= Car =======");
+        // Calls the *overridden* Info method in the Car class (Polymorphism)
+        myCar.Info();
+        // Calls the *inherited* Accelerate method from the Vehicle Class.
+        myCar.Drive();
+        myCar.Accelerate(10);
+        
+        Console.WriteLine("======= Motorcycle =======");
+        // Calls the *overrideen* info method in the Motorcycle class
+        
+        // Calls the *Inherited* Accelerate method from the Vehicle Class.
+        
+    }
+}

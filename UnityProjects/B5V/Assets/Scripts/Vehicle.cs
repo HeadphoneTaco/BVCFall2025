@@ -145,14 +145,14 @@ public class Motorcycle : Vehicle
     
     // Parameterized Constructor. Includes a default value for 'numberOfWheels'
     public Motorcycle(string model, string color, float speed, int numberOfWheels = 2) 
-        : base(model, color, speed) // Passes data to the base class construtor.
+        : base(model, color, speed) // Passes data to the base class constructor.
     {
         _numberOfWheels = numberOfWheels;
     }
     
     // Overriding the Info method to include wheel count (Polymorphism)
     
-    // Overriding the Drive method to reflect a Mortorcycle action ("Riding") (Polymorphism)
+    // Overriding the Drive method to reflect a Motorcycle action ("Riding") (Polymorphism)
 }
 
 class Program
@@ -196,7 +196,7 @@ class Program
         myCar.Accelerate(10);
         
         Console.WriteLine("======= Motorcycle =======");
-        // Calls the *overrideen* info method in the Motorcycle class
+        // Calls the *overridden* info method in the Motorcycle class
         
         // Calls the *Inherited* Accelerate method from the Vehicle Class.
         

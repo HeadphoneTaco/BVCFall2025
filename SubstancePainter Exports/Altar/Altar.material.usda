@@ -1,0 +1,663 @@
+#usda 1.0
+(
+    "Exported from Adobe Substance 3D Painter 11.0.2"
+    defaultPrim = "Altar_obj"
+)
+
+def "Altar_obj"
+{
+    def Scope "material"
+    {
+        def Material "AltarBack2" (
+            customData = {
+                dictionary adobe = {
+                    dictionary painter = {
+                        asset painterProject_spp = @C:/Users/m.hardwicke596/Github/BVCFall2025/SubstancePainter Projects/Altar.spp@
+                    }
+                }
+            }
+        )
+        {
+            asset inputs:basecolor_tex = @Altar_textures/Altar_AltarBack2_BaseColor.png@
+            asset inputs:compositedNormalDX_tex = @Altar_textures/Altar_AltarBack2_Normal.png@
+            asset inputs:emissive_tex = @Altar_textures/Altar_AltarBack2_Emissive.png@
+            asset inputs:height_tex = @Altar_textures/Altar_AltarBack2_Height.png@
+            asset inputs:metallic_tex = @Altar_textures/Altar_AltarBack2_Metallic.png@
+            asset inputs:opacity_tex = @Altar_textures/Altar_AltarBack2_BaseColor.png@
+            asset inputs:roughness_tex = @Altar_textures/Altar_AltarBack2_Roughness.png@
+            token outputs:adobe:surface.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+
+            def NodeGraph "UsdPreviewSurface"
+            {
+                def Shader "UsdPreviewSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float3 inputs:diffuseColor.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float3 inputs:emissiveColor.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/emissiveColorTextureShader.outputs:rgb>
+                    float inputs:ior = 1.4
+                    float inputs:metallic.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:opacity.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/opacityTextureShader.outputs:a>
+                    float inputs:roughness.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    token outputs:displacement
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "diffuseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "emissiveColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:emissive_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "opacityTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:opacity_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:a
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+
+            def NodeGraph "AdobeStandardMaterial_4_0"
+            {
+                def Shader "AdobeStandardMaterial_4_0Shader"
+                {
+                    uniform token info:id = "AdobeStandardMaterial_4_0"
+                    float3 inputs:baseColor.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float inputs:coatIOR = 1.6
+                    float3 inputs:emissive.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/emissiveTextureShader.outputs:rgb>
+                    float inputs:emissiveIntensity = 1
+                    float inputs:IOR = 1.4
+                    float inputs:metallic.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:opacity.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/opacityTextureShader.outputs:a>
+                    float inputs:roughness.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "baseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "opacityTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:opacity_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:a
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+
+                def Shader "emissiveTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBack2.inputs:emissive_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBack2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+            }
+        }
+
+        def Material "AltarBody2" (
+            customData = {
+                dictionary adobe = {
+                    dictionary painter = {
+                        asset painterProject_spp = @C:/Users/m.hardwicke596/Github/BVCFall2025/SubstancePainter Projects/Altar.spp@
+                    }
+                }
+            }
+        )
+        {
+            asset inputs:basecolor_tex = @Altar_textures/Altar_AltarBody2_BaseColor.png@
+            asset inputs:compositedNormalDX_tex = @Altar_textures/Altar_AltarBody2_Normal.png@
+            asset inputs:emissive_tex = @Altar_textures/Altar_AltarBody2_Emissive.png@
+            asset inputs:height_tex = @Altar_textures/Altar_AltarBody2_Height.png@
+            asset inputs:metallic_tex = @Altar_textures/Altar_AltarBody2_Metallic.png@
+            asset inputs:opacity_tex = @Altar_textures/Altar_AltarBody2_BaseColor.png@
+            asset inputs:roughness_tex = @Altar_textures/Altar_AltarBody2_Roughness.png@
+            token outputs:adobe:surface.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+
+            def NodeGraph "UsdPreviewSurface"
+            {
+                def Shader "UsdPreviewSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float3 inputs:diffuseColor.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float3 inputs:emissiveColor.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/emissiveColorTextureShader.outputs:rgb>
+                    float inputs:ior = 1.4
+                    float inputs:metallic.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:opacity.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/opacityTextureShader.outputs:a>
+                    float inputs:roughness.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    token outputs:displacement
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "diffuseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "emissiveColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:emissive_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "opacityTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:opacity_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:a
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+
+            def NodeGraph "AdobeStandardMaterial_4_0"
+            {
+                def Shader "AdobeStandardMaterial_4_0Shader"
+                {
+                    uniform token info:id = "AdobeStandardMaterial_4_0"
+                    float3 inputs:baseColor.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float inputs:coatIOR = 1.6
+                    float3 inputs:emissive.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/emissiveTextureShader.outputs:rgb>
+                    float inputs:emissiveIntensity = 1
+                    float inputs:IOR = 1.4
+                    float inputs:metallic.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:opacity.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/opacityTextureShader.outputs:a>
+                    float inputs:roughness.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "baseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "opacityTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:opacity_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:a
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+
+                def Shader "emissiveTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarBody2.inputs:emissive_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarBody2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+            }
+        }
+
+        def Material "AltarFront2" (
+            customData = {
+                dictionary adobe = {
+                    dictionary painter = {
+                        asset painterProject_spp = @C:/Users/m.hardwicke596/Github/BVCFall2025/SubstancePainter Projects/Altar.spp@
+                    }
+                }
+            }
+        )
+        {
+            asset inputs:basecolor_tex = @Altar_textures/Altar_AltarFront2_BaseColor.png@
+            asset inputs:compositedNormalDX_tex = @Altar_textures/Altar_AltarFront2_Normal.png@
+            asset inputs:emissive_tex = @Altar_textures/Altar_AltarFront2_Emissive.png@
+            asset inputs:height_tex = @Altar_textures/Altar_AltarFront2_Height.png@
+            asset inputs:metallic_tex = @Altar_textures/Altar_AltarFront2_Metallic.png@
+            asset inputs:opacity_tex = @Altar_textures/Altar_AltarFront2_BaseColor.png@
+            asset inputs:roughness_tex = @Altar_textures/Altar_AltarFront2_Roughness.png@
+            token outputs:adobe:surface.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/AdobeStandardMaterial_4_0Shader.outputs:surface>
+            token outputs:displacement.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:displacement>
+            token outputs:surface.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/UsdPreviewSurfaceShader.outputs:surface>
+
+            def NodeGraph "UsdPreviewSurface"
+            {
+                def Shader "UsdPreviewSurfaceShader"
+                {
+                    uniform token info:id = "UsdPreviewSurface"
+                    float3 inputs:diffuseColor.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/diffuseColorTextureShader.outputs:rgb>
+                    float3 inputs:emissiveColor.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/emissiveColorTextureShader.outputs:rgb>
+                    float inputs:ior = 1.4
+                    float inputs:metallic.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/normalTextureShader.outputs:rgb>
+                    float inputs:opacity.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/opacityTextureShader.outputs:a>
+                    float inputs:roughness.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/roughnessTextureShader.outputs:r>
+                    token outputs:displacement
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "diffuseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "emissiveColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:emissive_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "opacityTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:opacity_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:a
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/UsdPreviewSurface/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+            }
+
+            def NodeGraph "AdobeStandardMaterial_4_0"
+            {
+                def Shader "AdobeStandardMaterial_4_0Shader"
+                {
+                    uniform token info:id = "AdobeStandardMaterial_4_0"
+                    float3 inputs:baseColor.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/baseColorTextureShader.outputs:rgb>
+                    float inputs:coatIOR = 1.6
+                    float3 inputs:emissive.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/emissiveTextureShader.outputs:rgb>
+                    float inputs:emissiveIntensity = 1
+                    float inputs:IOR = 1.4
+                    float inputs:metallic.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/metallicTextureShader.outputs:r>
+                    normal3f inputs:normal.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/normalTextureShader.outputs:rgb>
+                    float inputs:opacity.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/opacityTextureShader.outputs:a>
+                    float inputs:roughness.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/roughnessTextureShader.outputs:r>
+                    token outputs:surface
+                }
+
+                def Shader "TexCoordReader"
+                {
+                    uniform token info:id = "UsdPrimvarReader_float2"
+                    token inputs:varname = "st"
+                    float2 outputs:result
+                }
+
+                def Shader "baseColorTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:basecolor_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+
+                def Shader "roughnessTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:roughness_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "metallicTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:metallic_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:r
+                }
+
+                def Shader "opacityTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:opacity_tex>
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float outputs:a
+                }
+
+                def Shader "normalTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    float4 inputs:bias = (-1, 1, -1, 0)
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:compositedNormalDX_tex>
+                    float4 inputs:scale = (2, -2, 2, 1)
+                    token inputs:sourceColorSpace = "raw"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    normal3f outputs:rgb
+                }
+
+                def Shader "emissiveTextureShader"
+                {
+                    uniform token info:id = "UsdUVTexture"
+                    asset inputs:file.connect = </Altar_obj/material/AltarFront2.inputs:emissive_tex>
+                    token inputs:sourceColorSpace = "sRGB"
+                    float2 inputs:st.connect = </Altar_obj/material/AltarFront2/AdobeStandardMaterial_4_0/TexCoordReader.outputs:result>
+                    token inputs:wrapS = "repeat"
+                    token inputs:wrapT = "repeat"
+                    float3 outputs:rgb
+                }
+            }
+        }
+    }
+
+    over "AltarBack"
+    {
+        over "AltarBack" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Altar_obj/material/AltarBack2>
+        }
+    }
+
+    over "AltarFront"
+    {
+        over "AltarFront" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Altar_obj/material/AltarFront2>
+        }
+    }
+
+    over "AltarBody"
+    {
+        over "AltarBody" (
+            prepend apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            rel material:binding = </Altar_obj/material/AltarBody2>
+        }
+    }
+}
+

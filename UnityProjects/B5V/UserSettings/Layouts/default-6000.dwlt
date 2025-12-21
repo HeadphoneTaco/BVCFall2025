@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 1140
+  controlID: 94
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 1062
+  controlID: 17
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -999,7 +999,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.1427882, y: 0.21000215, z: -0.030253805, w: -0.9673127}
     speed: 2
-    m_Value: {x: -0.1427882, y: 0.21000214, z: -0.030253805, w: -0.9673127}
+    m_Value: {x: -0.14270984, y: 0.20988691, z: -0.030237203, w: -0.96678185}
   m_Size:
     m_Target: 4.4620576
     speed: 2
@@ -1084,7 +1084,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/3DModels
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1094,16 +1094,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 96
   m_LastFolders:
-  - Assets/3DModels
+  - Assets
   m_LastFoldersGridSize: 96
-  m_LastProjectPath: C:\Users\micha\GitHub\BVCFall2025\UnityProjects\B5V
+  m_LastProjectPath: C:\Users\micha\GitHub\BVC-Fall-2025\UnityProjects\B5V
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 79.5}
-    m_SelectedIDs: aacf0000
-    m_LastClickedID: 53162
-    m_ExpandedIDs: 000000008acd00008ccd00008ecd000090cd000092cd000094cd000000ca9a3bffffff7f
+    m_SelectedIDs: 96c80000
+    m_LastClickedID: 51350
+    m_ExpandedIDs: 0000000096c8000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1132,7 +1132,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000008acd00008ccd00008ecd000090cd000092cd000094cd000000ca9a3bffffff7f
+    m_ExpandedIDs: 0000000096c80000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1160,7 +1160,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300005cb800006ef4000024d70000c8d0000002d30000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1267,7 +1267,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 72dbffff8adbffff44e0fffffafaffff90c900007eca0000
+      m_ExpandedIDs: fefaffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
